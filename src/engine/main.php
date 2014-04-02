@@ -13,7 +13,7 @@
         // Длинное тире &mdash;
         '/(^|\n|["„«])--?(\s)/u' => '$1—$2',
         '/(\s)--?(\s)/' => ' —$2',
-        // Непереносимый проблел после коротких слов &nbsp;
+        // Непереносимый пробел после коротких слов &nbsp;
         '/([\s][a-zа-яё]{1,2})[ ]/iu' => '$1 '
     );
     foreach ($arr as $key=>$val) {
@@ -25,6 +25,6 @@
         $text = preg_replace('/(„[^„“«»]*)»/mu', '$1“', $text);
     }
 
-	echo json_encode(array('response' => $text));
+	echo json_encode(array('response' =>  str_replace("\n", "<br>\n", $text)));
 
 ?>

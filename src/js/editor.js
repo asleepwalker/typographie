@@ -27,5 +27,5 @@ document.getElementById('submit').onclick = function() {
 	var data = {};
 	data.raw = document.getElementById('raw_input').value;
 	request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-	request.send('raw='+data.raw);
+	request.send('raw='+encodeURIComponent(data.raw));
 };

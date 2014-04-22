@@ -8,9 +8,9 @@
 */
 
 var App = {};
-App.state = 'free';
 App.in = 'plain';
 App.out = 'editor';
+App.state('free');
 
 App.send = function() {
 	request = new XMLHttpRequest();
@@ -20,8 +20,7 @@ App.send = function() {
 		if (request.status >= 200 && request.status < 400) window.App.show(JSON.parse(request.responseText));
 		else window.App.error();
 	};
-
-	request.onerror = window.App.error();
+	request.onerror = window.App.error;
 
 	var data = {};
 	data.in = window.App.in;
@@ -29,16 +28,23 @@ App.send = function() {
 	data.raw = document.getElementById('raw_input').value;
 	request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
 	request.send('in='+data.in+'&out='+data.out+'&raw='+encodeURIComponent(data.raw));
-	window.App.state = 'loading';
+	window.App.state('loading');
 };
 
 App.show = function(data) {
-	window.App.state = 'free';
+	window.App.state('free');
 	document.getElementById('display').innerHTML = data.response;
+	//enabling editor if need
 };
 
 App.error = function() {
-	window.App.state = 'free';
+	window.App.state('free');
+	//error message
+};
+
+App.state = function(state) {
+	window.App.now_state = state;
+	//visual
 };
 
 document.getElementById('submit').onclick = App.send;

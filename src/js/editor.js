@@ -7,25 +7,63 @@
 	mail@asleepwalker.ru
 */
 
-document.getElementById('submit').onclick = function() {
+var App = {};
+App.state = 'free';
+App.in = 'plain';
+App.out = 'editor';
+
+App.send = function() {
 	request = new XMLHttpRequest();
 	request.open('POST', 'engine/main.php', true);
 
 	request.onload = function() {
-		if (request.status >= 200 && request.status < 400){
-			var data = JSON.parse(request.responseText);
-			document.getElementById('display').innerHTML = data.response;
-		} else {
-			//error
-		}
+		if (request.status >= 200 && request.status < 400) window.App.show(JSON.parse(request.responseText));
+		else window.App.error();
 	};
 
-	request.onerror = function() {
-		//error
-	};
+	request.onerror = window.App.error();
 
 	var data = {};
+	data.in = window.App.in;
+	data.out = window.App.out;
 	data.raw = document.getElementById('raw_input').value;
 	request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-	request.send('raw='+encodeURIComponent(data.raw));
+	request.send('in='+data.in+'&out='+data.out+'&raw='+encodeURIComponent(data.raw));
+	window.App.state = 'loading';
 };
+
+App.show = function(data) {
+	window.App.state = 'free';
+	document.getElementById('display').innerHTML = data.response;
+};
+
+App.error = function() {
+	window.App.state = 'free';
+};
+
+document.getElementById('submit').onclick = App.send;
+var input_modes = document.getElementById('input_mode').getElementsByTagName('li');
+for (var i = 0; i < input_modes.length; i++) {
+	input_modes[i].onclick = function() {
+		if (this.className != 'active') {
+			for (var i = 0; i < input_modes.length; i++) { input_modes[i].className = ''; }
+			this.className = 'active';
+			window.App.in = this.getAttribute('data-mode');
+		}
+	};
+}
+var output_modes = document.getElementById('output_mode').getElementsByTagName('li');
+for (var i = 0; i < output_modes.length; i++) {
+	output_modes[i].onclick = function() {
+		if (this.className != 'active') {
+			for (var i = 0; i < output_modes.length; i++) { output_modes[i].className = ''; }
+			this.className = 'active';
+			window.App.out = this.getAttribute('data-mode');
+			if (window.App.out != 'plain') {
+				//disable editor
+			} else {
+				//if (editor) window.App.out = 'editor';
+			}
+		}
+	};
+}

@@ -15,9 +15,9 @@
 				<div id="input">
 					<textarea id="raw_input"></textarea>
 					<div class="controls">
-						<ul class="mode radiobox">
-							<li class="active">Текст</li>
-							<li>HTML</li>
+						<ul id="input_mode" class="mode radiobox">
+							<li class="active" data-mode="plain">Текст</li>
+							<li data-mode="html">HTML</li>
 						</ul>
 						<button id="submit" class="button submit">Обработать</button>
 						<button id="options" class="button text"><span class="icon">Настройки</span></button>
@@ -26,9 +26,9 @@
 				<div id="output">
 					<div id="display"></div>
 					<div class="controls">
-						<ul class="mode radiobox">
-							<li class="active">Текст</li>
-							<li>HTML</li>
+						<ul id="output_mode" class="mode radiobox">
+							<li class="active" data-mode="plain">Текст</li>
+							<li data-mode="html">HTML</li>
 						</ul>
 					</div>
 				</div>

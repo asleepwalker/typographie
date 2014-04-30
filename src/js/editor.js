@@ -9,7 +9,8 @@
 
 var App = {};
 App.in = 'plain';
-App.out = 'editor';
+App.out = 'plain';
+App.editor = 'enabled';
 
 App.send = function() {
 	request = new XMLHttpRequest();
@@ -24,9 +25,10 @@ App.send = function() {
 	var data = {};
 	data.in = window.App.in;
 	data.out = window.App.out;
+	data.editor = window.App.editor;
 	data.raw = document.getElementById('raw_input').value;
 	request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-	request.send('in='+data.in+'&out='+data.out+'&raw='+encodeURIComponent(data.raw));
+	request.send('in='+data.in+'&out='+data.out+'&editor='+data.editor+'&raw='+encodeURIComponent(data.raw));
 	window.App.state('loading');
 };
 
@@ -64,11 +66,15 @@ for (var i = 0; i < output_modes.length; i++) {
 			for (var i = 0; i < output_modes.length; i++) { output_modes[i].className = ''; }
 			this.className = 'active';
 			window.App.out = this.getAttribute('data-mode');
-			if (window.App.out != 'plain') {
-				//disable editor
-			} else {
-				//if (editor) window.App.out = 'editor';
-			}
 		}
 	};
 }
+document.getElementById('editor_checkbox').onclick = function() {
+	if (window.App.editor == 'enabled') {
+		document.getElementById('ec_input').className = 'checkbox';
+		window.App.editor = 'disabled';
+	} else {
+		document.getElementById('ec_input').className = 'checkbox checked';
+		window.App.editor = 'enabled';
+	}
+};

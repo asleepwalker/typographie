@@ -13,7 +13,12 @@ HEADER #logo A { color: #2A7FFF; font-size: 26px !important; text-decoration: no
 #wrap #editor .controls #options.button { background: none; height: 28px; margin-left: 5px; }
 #wrap #editor .controls #options.button SPAN.icon { background: url(i/icons.png) no-repeat -1px -1px; color: #333; display: inline-block; font: 13px/28px "Arial", sans-serif; height: 28px; }
 #wrap #editor .controls #options.button:hover SPAN.icon { background-position: -1px -31px !important; color: #000; }
-#wrap #editor .controls .mode { float: right;}
+#wrap #editor .controls .mode { float: right; }
+#wrap #editor .controls #editor_checkbox { display: inline-block; height: 30px; line-height: 30px; margin-left: 4px; }
+#wrap #editor .controls #editor_checkbox #ec_input { top: 3px; }
+#wrap #editor .controls #editor_checkbox LABEL { color: #333; font: 14px "Arial", sans-serif; }
+#wrap #editor .controls #editor_checkbox:hover #ec_input { border-color: #999 !important; }
+#wrap #editor .controls #editor_checkbox:hover LABEL { color: #222 !important; }
 
 FOOTER { background: #EEE; border-top: 1px solid #DDD; bottom: 0; height: 30px; position: fixed; width: 100%; }
 FOOTER A { color: #15C; font: 13px/30px "Arial", sans-serif; text-decoration: none; }
@@ -32,3 +37,5 @@ FOOTER NAV UL LI#author A:hover SPAN.icon { color: #000; }
 .radiobox LI { color: #555; font: bold 11px/24px "Arial", sans-serif; display: inline-block; height: 24px; padding: 0 8px; }
 .radiobox LI:hover { color: #222; } 
 .radiobox LI.active { -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1); -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,.1); box-shadow: inset 0 1px 2px rgba(0,0,0,.1); background-color: #E8E8E8; background-image: -webkit-linear-gradient(top, #E8E8E8, #D5D5D5); background-image: -moz-linear-gradient(top, #E8E8E8, #D5D5D5); background-image: -ms-linear-gradient(top, #E8E8E8, #D5D5D5); background-image: -o-linear-gradient(top, #E8E8E8, #D5D5D5); background-image: linear-gradient(top, #E8E8E8, #D5D5D5); color: #222; }
+.checkbox { background: #EEE; border: 1px solid #BBB; cursor: default; display: inline-block; height: 15px; margin-right: 6px; position: relative; top: 1px; width: 15px; }
+.checkbox.checked:after { background: url(i/checkmark.png) no-repeat center center; bottom: 0; left: 0; position: absolute; right: 1px; top: 0; content: ''; }

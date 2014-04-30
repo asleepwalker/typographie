@@ -10,7 +10,6 @@
 var App = {};
 App.in = 'plain';
 App.out = 'editor';
-App.state('free');
 
 App.send = function() {
 	request = new XMLHttpRequest();
@@ -45,7 +44,7 @@ App.error = function() {
 App.state = function(state) {
 	window.App.now_state = state;
 	//visual
-};
+}; App.state('free');
 
 document.getElementById('submit').onclick = App.send;
 var input_modes = document.getElementById('input_mode').getElementsByTagName('li');

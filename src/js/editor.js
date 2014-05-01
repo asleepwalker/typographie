@@ -27,9 +27,10 @@ App.send = function() {
 	data.in = window.App.in;
 	data.out = window.App.out;
 	data.editor = window.App.editor;
+	data.actions = window.App.actions.list.join(',');
 	data.raw = document.getElementById('raw_input').value;
 	request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-	request.send('in='+data.in+'&out='+data.out+'&editor='+data.editor+'&raw='+encodeURIComponent(data.raw));
+	request.send('in='+data.in+'&out='+data.out+'&editor='+data.editor+'&actions='+data.actions+'&raw='+encodeURIComponent(data.raw));
 	window.App.state('loading');
 };
 

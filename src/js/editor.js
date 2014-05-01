@@ -49,6 +49,16 @@ App.state = function(state) {
 	//visual
 }; App.state('free');
 
+App.actions.add = function(action) {
+	if (App.actions.list.indexOf(action) == -1)
+		App.actions.list.push(action);
+};
+
+App.actions.remove = function(action) {
+	if (App.actions.list.indexOf(action) != -1)
+		App.actions.list.splice(App.actions.list.indexOf(action), 1);
+};
+
 document.getElementById('submit').onclick = App.send;
 var input_modes = document.getElementById('input_mode').getElementsByTagName('li');
 for (var i = 0; i < input_modes.length; i++) {

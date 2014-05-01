@@ -11,7 +11,7 @@ var App = {};
 App.in = 'plain';
 App.out = 'plain';
 App.editor = 'enabled';
-App.actions = ['inquot','dash','dblspace','special','math','crrctpunc','crrctspecial','nbsp','hellip','safehtml'];
+App.actions = {'list':['inquot','dash','dblspace','special','math','crrctpunc','crrctspecial','nbsp','hellip','safehtml']};
 
 App.send = function() {
 	request = new XMLHttpRequest();

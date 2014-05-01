@@ -13,7 +13,7 @@
 
 		private $_in;
 		private $_out;
-		private $_opts;
+		private $_actions;
 
 		private $_symbols = array(
 			'plain' => array(
@@ -56,7 +56,8 @@
 			$this->mode($in, $out);
 		}
 
-		public function mode($in, $out) {
+		public function mode($in, $out
+			) {
 			$this->_in = $in;
 			$this->_out = $out;
 		}

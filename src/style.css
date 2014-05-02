@@ -29,6 +29,16 @@ FOOTER NAV UL LI { color: #333; display: inline-block; font: 13px/30px "Arial", 
 FOOTER NAV UL LI#author A SPAN.icon { background: url(i/icons.png) no-repeat 0 -60px; color: #333; display: inline-block; font-weight: bold !important; height: 30px; }
 FOOTER NAV UL LI#author A:hover SPAN.icon { color: #000; }
 
+#dialog_wrapper { background: rgba(0,0,0,0.8); bottom: 0; left: 0; position: absolute; right: 0; top: 0; z-index: 9999; }
+#dialog_box { border: 8px solid rgba(0,0,0,0.6); border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; left: 50%; margin-left: -220px; margin-top: -150px; position: absolute; top: 50%; width: 440px; z-index: 10000; }
+#dialog_body { background: white; border: 1px solid #AAA; border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; padding: 15px 20px; } 
+#dialog_body #options { list-style: none; }
+#dialog_body #options LI { margin-bottom: 4px; }
+#dialog_body #options DIV { display: inline-block; }
+#dialog_body #options LI .checkbox { height: 12px; top: 2px; width: 12px; }
+#dialog_body #options LI LABEL { color: #222; font: 13px "Arial", sans-serif; }
+#dialog_body #buttons { margin-top: 10px; text-align: right; }
+
 .button, .radiobox { cursor: default; white-space: nowrap; }
 .button.submit { background-color: #4D90FE; background-image: -webkit-linear-gradient(top, #4D90FE, #4787ED); background-image: -moz-linear-gradient(top, #4D90FE, #4787ED); background-image: -ms-linear-gradient(top, #4D90FE, #4787ED); background-image: -o-linear-gradient(top, #4D90FE, #4787ED); background-image: linear-gradient(top, #4D90FE, #4787ED); border: 1px solid #3079ED; color: #FFF; font: bold 11px/28px "Arial", sans-serif; height: 28px; padding: 0 12px; text-shadow: #015ABB 1px 1px 1px; }
 .button.submit:hover { background-color: #508CEB; background-image: -webkit-linear-gradient(top, #619DFF, #508CEB); background-image: -moz-linear-gradient(top, #619DFF, #508CEB); background-image: -ms-linear-gradient(top, #619DFF, #508CEB); background-image: -o-linear-gradient(top, #619DFF, #508CEB); background-image: linear-gradient(top, #619DFF, #508CEB); }

@@ -105,10 +105,20 @@ document.getElementById('show_options').onclick = function() {
 	};
 
 	tick();
-
-	var bounds = document.getElementById('dialog_box').getBoundingClientRect();
-	//show close zones
+	window.resizeDialog();
+	window.onresize = window.resizeDialog;
 };
+function resizeDialog() {
+	var bounds = document.getElementById('dialog_box').getBoundingClientRect();
+	document.getElementById('bz_top').style.height = bounds.top+'px';
+	document.getElementById('bz_left').style.top = bounds.top+'px';
+	document.getElementById('bz_left').style.height = bounds.height+'px';
+	document.getElementById('bz_left').style.width = bounds.left+'px';
+	document.getElementById('bz_right').style.top = bounds.top+'px';
+	document.getElementById('bz_right').style.height = bounds.height+'px';
+	document.getElementById('bz_right').style.left = bounds.right+'px';
+	document.getElementById('bz_bottom').style.top = bounds.bottom+'px';
+}
 var options = document.getElementById('options').getElementsByTagName('li');
 for (var i = 0; i < options.length; i++) {
 	options[i].getElementsByTagName('div')[0].onclick = function() {

@@ -17,6 +17,5 @@
 	require_once('../typographie.php');
 	$engine = new typographie($_POST['in'], $_POST['out'], $_POST['editor']);
 	$engine->actions($_POST['actions']);
-	$text = $engine->process($_POST['raw']);
-	echo json_encode(array('response' =>  str_replace("\n", "<br>\n", $text)));
+	echo json_encode(array('response' => $engine->process($_POST['raw'])));
 ?>

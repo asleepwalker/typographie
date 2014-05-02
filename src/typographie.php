@@ -76,13 +76,21 @@
 			$actions['/"([\s-\.!,:;\?\)\]\n\r]|$)/'] = '»$1';
 			$actions['/([^\s])"([^\s])/']            = '$1»$2';
 
+			// Отступы в пунктуации
+			if (in_array('crrctpunc', $this->_actions)) {
+				$actions['/([ ]-[ ]|[ ]-|-[ ])/']            = ' - ';
+				/*$actions['/([ ],[ ]|,[ ]|[ ],|,)/']          = ', ';
+				. ! ? ?! : ; ( ) ... ?.. !.. O_o */
+			}
+
 			// Двойные+ пробелы
-			if (in_array('dash', $this->_actions)) {
-				$actions['/\s+/']                        = ' ';
+			if (in_array('dblspace', $this->_actions)) {
+				$actions['/[ ]+/']                       = ' ';
 			}
 
 			// Тире, минус, интервал
 			if (in_array('dash', $this->_actions)) {
+				$actions['/[-]{2,}/']                    = '—';
 				$actions['/(^|\n|["„«])--?(\s)/u']       = '$1—$2';
 				$actions['/(\s)--?(\s)/']                = ' —$2';
 			}

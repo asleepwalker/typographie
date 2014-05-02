@@ -13,6 +13,7 @@
 
 		private $_in;
 		private $_out;
+		private $_editor;
 		private $_actions;
 
 		private $_symbols = array(
@@ -52,34 +53,65 @@
 		);
 
 
-		public function __construct($in = 'plain', $out = 'plain') {
-			$this->mode($in, $out);
+		public function __construct($in = 'plain', $out = 'plain', $editor = false) {
+			$this->mode($in, $out, $editor);
 		}
 
-		public function mode($in, $out
-			) {
+		public function mode($in, $out, $editor) {
 			$this->_in = $in;
 			$this->_out = $out;
+			$this->_editor = $editor;
+		}
+
+		public function actions($actionlist) {
+			$this->_actions = explode(',', $actionlist);
 		}
 
 		public function process($raw) {
-			$text = html_entity_decode($raw, ENT_QUOTES, 'utf-8');
-			$arr = array(
-				'/…/u'                         => '...',
-				'/(^|[\s;\(\[-])"/'            => '$1«',
-				'/"([\s-\.!,:;\?\)\]\n\r]|$)/' => '»$1',
-				'/([^\s])"([^\s])/'            => '$1»$2',
-				'/(^|\n|["„«])--?(\s)/u'       => '$1—$2',
-				'/(\s)--?(\s)/'                => ' —$2',
-				'/([\s][a-zа-яё]{1,2})[ ]/iu'  => '$1 '
-			);
-			foreach ($arr as $key=>$val) {
-				$text = preg_replace($key, $val, $text);
+			$actions = array();
+			$text = html_entity_decode($raw, ENT_QUOTES, 'UTF-8');
+
+			// Кавычки-ёлочки
+			$actions['/(^|[\s;\(\[-])"/']            = '$1«';
+			$actions['/"([\s-\.!,:;\?\)\]\n\r]|$)/'] = '»$1';
+			$actions['/([^\s])"([^\s])/']            = '$1»$2';
+
+			// Двойные+ пробелы
+			if (in_array('dash', $this->_actions)) {
+				$actions['/\s+/']                        = ' ';
 			}
-			while (preg_match('/(«[^«»]*)«/mu', $text)) {
-				$text = preg_replace('/(«[^«»]*)«/mu', '$1„', $text);
-				$text = preg_replace('/(„[^„“«»]*)»/mu', '$1“', $text);
+
+			// Тире, минус, интервал
+			if (in_array('dash', $this->_actions)) {
+				$actions['/(^|\n|["„«])--?(\s)/u']       = '$1—$2';
+				$actions['/(\s)--?(\s)/']                = ' —$2';
 			}
+
+			// Неразрывные пробелы
+			if (in_array('nbsp', $this->_actions)) {
+				$actions['/([\s][a-zа-яё]{1,2})[ ]/iu']  = '$1 ';
+			}
+
+			// Символ троеточия
+			if (in_array('hellip', $this->_actions)) {
+				$actions['/(\.){2,5}/']  = '…';
+			}
+
+			// Выполняем операции замены
+			foreach ($actions as $key=>$val) $text = preg_replace($key, $val, $text);
+
+			// Вложенные кавычки
+			if (in_array('inquot', $this->_actions)) {
+				while (preg_match('/(«[^«»]*)«/mu', $text)) {
+					$text = preg_replace('/(«[^«»]*)«/mu', '$1„', $text);
+					$text = preg_replace('/(„[^„“«»]*)»/mu', '$1“', $text);
+				}
+			} else {
+				// Дублирующие кавычки сливаются в одни
+				$text = preg_replace('/(«)+/', '«', $text);
+				$text = preg_replace('/(»)+/', '»', $text);
+			}
+
 			return $text;
 		}
 	};

@@ -9,10 +9,14 @@
 		mail@asleepwalker.ru
 	*/
 
-	$raw = $_POST['raw'];
-	require_once('../typographie.php');
-	$engine = new typographie('plain', 'editor');
-	$text = $engine->process($raw);
-	echo json_encode(array('response' =>  str_replace("\n", "<br>\n", $text)));
+	if (!(isset($_POST['raw']) && isset($_POST['actions']) && isset($_POST['in']) && isset($_POST['out']) && isset($_POST['editor']))) {
+		echo json_encode(array('error' => '1'));
+		exit;
+	}
 
+	require_once('../typographie.php');
+	$engine = new typographie($_POST['in'], $_POST['out'], $_POST['editor']);
+	$engine->actions($_POST['actions']);
+	$text = $engine->process($_POST['raw']);
+	echo json_encode(array('response' =>  str_replace("\n", "<br>\n", $text)));
 ?>

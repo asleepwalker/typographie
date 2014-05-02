@@ -91,7 +91,7 @@ document.getElementById('editor_checkbox').onclick = function() {
 	}
 };
 document.getElementById('show_options').onclick = function() {
-	el = document.getElementById('dialog_wrapper');
+	var el = document.getElementById('dialog_wrapper');
 	el.style.display = 'block';
 	el.style.opacity = 0;
 	
@@ -105,6 +105,9 @@ document.getElementById('show_options').onclick = function() {
 	};
 
 	tick();
+
+	var bounds = document.getElementById('dialog_box').getBoundingClientRect();
+	//show close zones
 };
 var options = document.getElementById('options').getElementsByTagName('li');
 for (var i = 0; i < options.length; i++) {

@@ -90,3 +90,32 @@ document.getElementById('editor_checkbox').onclick = function() {
 		window.App.editor = 'enabled';
 	}
 };
+document.getElementById('show_options').onclick = function() {
+	el = document.getElementById('dialog_wrapper');
+	el.style.display = 'block';
+	el.style.opacity = 0;
+	
+	var last = +new Date();
+	var tick = function() {
+		el.style.opacity = +el.style.opacity + (new Date() - last) / 400;
+		last = +new Date();
+		if (+el.style.opacity < 1) {
+			(window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 10)
+		}
+	};
+
+	tick();
+};
+var options = document.getElementById('options').getElementsByTagName('li');
+for (var i = 0; i < options.length; i++) {
+	options[i].getElementsByTagName('div')[0].onclick = function() {
+		var option = this.getAttribute('data-option');
+		if (window.App.actions.list.indexOf(option) == -1) {
+			window.App.actions.add(option);
+			this.getElementsByTagName('div')[0].className = 'checkbox checked';
+		} else {
+			window.App.actions.remove(option);
+			this.getElementsByTagName('div')[0].className = 'checkbox';
+		}
+	};
+}

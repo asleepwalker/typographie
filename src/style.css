@@ -10,9 +10,9 @@ HEADER #logo A { color: #2A7FFF; font-size: 26px !important; text-decoration: no
 #wrap #editor #output { background: #F8F8F8; border: 1px solid #DDD; border-top-color: #CFCFCF !important; float: right; height: 300px; padding: 8px 0.5%; width: 48%; }
 #wrap #editor #output #display { color: #444; font: 16px "Arial", sans-serif; height: 260px; margin-bottom: 10px; }
 #wrap #editor .controls { height: 30px; padding: 0 5px; }
-#wrap #editor .controls #options.button { background: none; height: 28px; margin-left: 5px; }
-#wrap #editor .controls #options.button SPAN.icon { background: url(i/icons.png) no-repeat -1px -1px; color: #333; display: inline-block; font: 13px/28px "Arial", sans-serif; height: 28px; }
-#wrap #editor .controls #options.button:hover SPAN.icon { background-position: -1px -31px !important; color: #000; }
+#wrap #editor .controls #show_options.button { background: none; height: 28px; margin-left: 5px; }
+#wrap #editor .controls #show_options.button SPAN.icon { background: url(i/icons.png) no-repeat -1px -1px; color: #333; display: inline-block; font: 13px/28px "Arial", sans-serif; height: 28px; }
+#wrap #editor .controls #show_options.button:hover SPAN.icon { background-position: -1px -31px !important; color: #000; }
 #wrap #editor .controls .mode { float: right; }
 #wrap #editor .controls #editor_checkbox { display: inline-block; height: 30px; line-height: 30px; margin-left: 4px; }
 #wrap #editor .controls #editor_checkbox #ec_input { top: 3px; }
@@ -33,10 +33,11 @@ FOOTER NAV UL LI#author A:hover SPAN.icon { color: #000; }
 #dialog_box { border: 8px solid rgba(0,0,0,0.6); border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; left: 50%; margin-left: -220px; margin-top: -150px; position: absolute; top: 50%; width: 440px; z-index: 10000; }
 #dialog_body { background: white; border: 1px solid #AAA; border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; padding: 15px 20px; } 
 #dialog_body #options { list-style: none; }
-#dialog_body #options LI { margin-bottom: 4px; }
+#dialog_body #options LI { padding: 2px 0; }
 #dialog_body #options DIV { display: inline-block; }
 #dialog_body #options LI .checkbox { height: 12px; top: 2px; width: 12px; }
 #dialog_body #options LI LABEL { color: #222; font: 13px "Arial", sans-serif; }
+#dialog_body #options DIV:hover .checkbox { border-color: #999 !important; }
 #dialog_body #buttons { margin-top: 10px; text-align: right; }
 
 .button, .radiobox { cursor: default; white-space: nowrap; }

@@ -71,17 +71,17 @@
 			$actions = array();
 			$text = html_entity_decode($raw, ENT_QUOTES, 'UTF-8');
 
-			// Кавычки-ёлочки
-			$actions['/(^|[\s;\(\[-])"/']            = '$1«';
-			$actions['/"([\s-\.!,:;\?\)\]\n\r]|$)/'] = '»$1';
-			$actions['/([^\s])"([^\s])/']            = '$1»$2';
-
 			// Отступы в пунктуации
 			if (in_array('crrctpunc', $this->_actions)) {
 				if (in_array('dash', $this->_actions)) $actions['/[-]{2,5}/'] = '—';
 				$actions['/([ ]-[ ]|[ ]-|-[ ])/u'] = ' - ';
 				$actions['/[ ]*([.,;!?:]+)[ ]*/u'] = '$1 ';		
 			}
+
+			// Кавычки-ёлочки
+			$actions['/(^|[\s;\(\[-])"/']            = '$1«';
+			$actions['/"([\s-\.!,:;\?\)\]\n\r]|$)/'] = '»$1';
+			$actions['/([^\s])"([^\s])/']            = '$1»$2';
 
 			// Двойные+ пробелы
 			if (in_array('dblspace', $this->_actions)) {

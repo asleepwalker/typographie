@@ -78,9 +78,9 @@
 
 			// Отступы в пунктуации
 			if (in_array('crrctpunc', $this->_actions)) {
-				if (in_array('dash', $this->_actions)) $actions['/[-]{2,}/'] = '—';
-				$actions['/([ ]-[ ]|[ ]-|-[ ])/']            = ' - ';
-				$actions['/(?<=[.,;!?:])(?=[^ .,;!?:])/u']   = ' ';
+				if (in_array('dash', $this->_actions)) $actions['/[-]{2,5}/'] = '—';
+				$actions['/([ ]-[ ]|[ ]-|-[ ])/u'] = ' - ';
+				$actions['/[ ]*([.,;!?:]+)[ ]*/u'] = '$1 ';		
 			}
 
 			// Двойные+ пробелы

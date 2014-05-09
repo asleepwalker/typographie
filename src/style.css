@@ -9,9 +9,7 @@ HEADER #logo A { color: #2A7FFF; font-size: 26px !important; text-decoration: no
 #wrap #editor #input TEXTAREA { color: #111; display: block; font: 16px "Arial", sans-serif; height: 300px; margin-bottom: 10px; outline: none; resize: none; width: 100%; }
 #wrap #editor #output { background: #F8F8F8; border: 1px solid #DDD; border-top-color: #CFCFCF !important; float: right; height: 340px; padding: 8px 0.5%; width: 48%; }
 #wrap #editor #output #display { color: #444; font: 16px "Arial", sans-serif; height: 300px; margin-bottom: 10px; overflow-y: auto; white-space: pre-wrap; }
-#wrap #editor #output #display .fix.visual { background: rgba(52, 174, 255, 0.15); }
-#wrap #editor #output #display .fix.correct { background: rgba(255, 52, 52, 0.15); }
-#wrap #editor #output #display .fix.technical { background: rgba(0, 255, 31, 0.05); }
+#wrap #editor #output #display .fix { background: rgba(52, 174, 255, 0.15); }
 #wrap #editor .controls { height: 30px; padding: 0 5px; }
 #wrap #editor .controls #show_options.button { background: none; height: 28px; margin-left: 5px; }
 #wrap #editor .controls #show_options.button SPAN.icon { background: url(i/icons.png) no-repeat -1px -1px; color: #333; display: inline-block; font: 13px/28px "Arial", sans-serif; height: 28px; }

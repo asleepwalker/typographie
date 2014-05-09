@@ -13,54 +13,15 @@
 
 		private $_in;
 		private $_out;
-		private $_editor;
 		private $_actions;
 
-		private $_symbols = array(
-			'plain' => array(
-				'nbsp'    => ' ',
-				'lquote'  => '«',
-				'rquote'  => '»',
-				'lquote2' => '„',
-				'rquote2' => '“',
-				'mdash'   => '—',
-				'ndash'   => '–',
-				'minus'   => '–',
-				'hellip'  => '…',
-				'copy'    => '©',
-				'trade'   => '™',
-				'apos'    => '&#39;',
-				'reg'     => '<sup><small>®</small></sup>',
-				'multiply' => '&times;',
-				'1/2' => '&frac12;',
-				'1/4' => '&frac14;',
-				'3/4' => '&frac34;',
-				'plusmn' => '&plusmn;',
-				'rarr' => '&rarr;',
-				'larr' => '&larr;',
-				'rsquo' => '&rsquo;'),
-			'html' => array(
-				'nbsp'    => '&nbsp;',
-			)
-		);
-
-		private $_ignore = array(
-			'<pre[^>]*>' => '<\/pre>',
-			'<style[^>]*>' => '<\/style>',
-			'<script[^>]*>' => '<\/script>',
-			'<!--' => '-->',
-			'<code[^>]*>' => '<\/code>'
-		);
-
-
-		public function __construct($in = 'plain', $out = 'plain', $editor = false) {
-			$this->mode($in, $out, $editor);
+		public function __construct($in = 'plain', $out = 'plain') {
+			$this->mode($in, $out);
 		}
 
-		public function mode($in, $out, $editor) {
+		public function mode($in, $out) {
 			$this->_in = $in;
 			$this->_out = $out;
-			$this->_editor = $editor;
 		}
 
 		public function actions($actionlist) {

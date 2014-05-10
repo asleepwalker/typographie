@@ -10,7 +10,7 @@
 var App = {};
 App.in = 'plain';
 App.out = 'plain';
-App.editor = 'enabled';
+App.highlight = 'enabled';
 App.actions = {'list':['inquot','dash','dblspace','special','math','crrctpunc','crrctspecial','nbsp','hellip','safehtml']};
 
 App.send = function() {
@@ -26,18 +26,17 @@ App.send = function() {
 	var data = {};
 	data.in = window.App.in;
 	data.out = window.App.out;
-	data.editor = window.App.editor;
+	data.highlight = window.App.highlight;
 	data.actions = window.App.actions.list.join(',');
 	data.raw = document.getElementById('raw_input').value;
 	request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-	request.send('in='+data.in+'&out='+data.out+'&editor='+data.editor+'&actions='+data.actions+'&raw='+encodeURIComponent(data.raw));
+	request.send('in='+data.in+'&out='+data.out+'&highlight='+data.highlight+'&actions='+data.actions+'&raw='+encodeURIComponent(data.raw));
 	window.App.state('loading');
 };
 
 App.show = function(data) {
 	window.App.state('free');
 	document.getElementById('display').innerHTML = data.response;
-	//enabling editor if need
 };
 
 App.error = function() {
@@ -71,6 +70,7 @@ for (var i = 0; i < input_modes.length; i++) {
 			for (var i = 0; i < input_modes.length; i++) { input_modes[i].className = ''; }
 			this.className = 'active';
 			window.App.in = this.getAttribute('data-mode');
+			window.App.send();
 		}
 	};
 }
@@ -83,19 +83,21 @@ for (var i = 0; i < output_modes.length; i++) {
 			for (var i = 0; i < output_modes.length; i++) { output_modes[i].className = ''; }
 			this.className = 'active';
 			window.App.out = this.getAttribute('data-mode');
+			window.App.send();
 		}
 	};
 }
 
-/* Output editor turning on/off */
-document.getElementById('editor_checkbox').onclick = function() {
-	if (window.App.editor == 'enabled') {
-		document.getElementById('ec_input').className = 'checkbox';
-		window.App.editor = 'disabled';
+/* Output highlight turning on/off */
+document.getElementById('highlight').onclick = function() {
+	if (window.App.highlight == 'enabled') {
+		document.getElementById('hcheckbox').className = 'checkbox';
+		window.App.highlight = 'disabled';
 	} else {
-		document.getElementById('ec_input').className = 'checkbox checked';
-		window.App.editor = 'enabled';
+		document.getElementById('hcheckbox').className = 'checkbox checked';
+		window.App.highlight = 'enabled';
 	}
+	window.App.send();
 };
 
 /* Showing options dialog */

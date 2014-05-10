@@ -15,11 +15,11 @@ HEADER #logo A { color: #2A7FFF; font-size: 26px !important; text-decoration: no
 #wrap #editor .controls #show_options.button SPAN.icon { background: url(i/icons.png) no-repeat -1px -1px; color: #333; display: inline-block; font: 13px/28px "Arial", sans-serif; height: 28px; }
 #wrap #editor .controls #show_options.button:hover SPAN.icon { background-position: -1px -31px !important; color: #000; }
 #wrap #editor .controls .mode { float: right; }
-#wrap #editor .controls #editor_checkbox { display: inline-block; height: 30px; line-height: 30px; margin-left: 4px; }
-#wrap #editor .controls #editor_checkbox #ec_input { top: 3px; }
-#wrap #editor .controls #editor_checkbox LABEL { color: #333; font: 14px "Arial", sans-serif; }
-#wrap #editor .controls #editor_checkbox:hover #ec_input { border-color: #999 !important; }
-#wrap #editor .controls #editor_checkbox:hover LABEL { color: #222 !important; }
+#wrap #editor .controls #highlight { display: inline-block; height: 30px; line-height: 30px; margin-left: 4px; }
+#wrap #editor .controls #highlight #hcheckbox { top: 3px; }
+#wrap #editor .controls #highlight LABEL { color: #333; font: 14px "Arial", sans-serif; }
+#wrap #editor .controls #highlight:hover #hcheckbox { border-color: #999 !important; }
+#wrap #editor .controls #highlight:hover LABEL { color: #222 !important; }
 
 FOOTER { background: #EEE; border-top: 1px solid #DDD; bottom: 0; height: 30px; position: fixed; width: 100%; }
 FOOTER A { color: #15C; font: 13px/30px "Arial", sans-serif; text-decoration: none; }

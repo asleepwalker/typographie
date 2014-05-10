@@ -32,28 +32,86 @@
 			$actions = array();
 			$text = html_entity_decode($raw, ENT_QUOTES, 'UTF-8');
 
+			// Спецсимволы
+			if (in_array('special', $this->_actions)) {
+				$actions['/\{([\'"])}/']                       = '$1';
+				$actions['/(\([cс]\))|(\{copy\})/ui']          = '©';
+				$actions['/(\(r\))|(\{reg\})/ui']              = '®';
+				$actions['/(\((тм|tm)\))|(\{(tm|trade)\})/ui'] = '™';
+				$actions['/\{(ss|sect)}/']                     = '§';
+				$actions['/\{(\*|deg)}/']                      = '°';
+
+				$actions['/\{euro}/']                          = '€';
+				$actions['/\{cent}/']                          = '¢';
+				$actions['/\{pound}/']                         = '£';
+				$actions['/\{(yen|yuan)}/']                    = '¥';
+
+				$actions['/\{pi\}/ui']                         = 'π';
+			}
+
+			// Математические символы
+			if (in_array('math', $this->_actions)) {
+				$actions['/\{!=}/']                            = '≠';
+				$actions['/\{~}/']                             = '≈';
+				$actions['/\{equal}/']                         = '≡';
+				$actions['/\{<=}/']                            = '⩽';
+				$actions['/\{=>}/']                            = '⩾';
+				$actions['/\+-/']                              = '±';
+				$actions['/<->/']                              = '↔';
+				$actions['/<=>/']                              = '⇔';
+				$actions['/<-/']                               = '←';
+				$actions['/<=/']                               = '⇐';
+				$actions['/->/']                               = '→';
+				$actions['/=>/']                               = '⇒';
+
+				$actions['/\{\^1}/']                           = '¹';
+				$actions['/\{\^2}/']                           = '²';
+				$actions['/\{\^3}/']                           = '³';
+				$actions['/\{1\/8}/']                          = '⅛';
+				$actions['/\{1\/6}/']                          = '⅙';
+				$actions['/\{1\/5}/']                          = '⅕';
+				$actions['/\{1\/4}/']                          = '¼';
+				$actions['/\{1\/3}/']                          = '⅓';
+				$actions['/\{1\/2}/']                          = '½';
+				$actions['/\{2\/5}/']                          = '⅖';
+				$actions['/\{2\/3}/']                          = '⅔';
+				$actions['/\{3\/8}/']                          = '⅜';
+				$actions['/\{3\/5}/']                          = '⅗';
+				$actions['/\{3\/4}/']                          = '¾';
+				$actions['/\{4\/5}/']                          = '⅘';
+				$actions['/\{5\/6}/']                          = '⅚';
+				$actions['/\{5\/8}/']                          = '⅝';
+				$actions['/\{7\/8}/']                          = '⅞';
+
+				$actions['/\{part}/']                          = '∂';
+				$actions['/\{any}/']                           = '∀';
+				$actions['/\{exist}/']                         = '∃';
+				$actions['/\{empty}/']                         = '∅';
+				$actions['/\{infinity}/']                      = '∞';
+				$actions['/\{belong}/']                        = '∈';
+				$actions['/\{!belong}/']                       = '∉';
+				$actions['/\{v}/']                             = '√';
+				$actions['/\{v3}/']                            = '∛';
+				$actions['/\{v4}/']                            = '∜';
+				$actions['/\{ang}/']                           = '∠';
+			}
+
 			// Отступы в пунктуации
 			if (in_array('crrctpunc', $this->_actions)) {
 				if (in_array('dash', $this->_actions)) $actions['/[-]{2,5}/'] = '—';
-				$actions['/([ ]+[-—][ ]*)|([ ]*[-—][ ]+)/u'] = ' - ';
-				$actions['/(?<=[.,;!?:])(?=[^ \n"\'.,;!?:\]\)])/u']   = ' ';
-				$actions['/[ ]*(?=[.,;!?:])/u']   = '';	
+				$actions['/([ ]+[-—][ ]*)|([ ]*[-—][ ]+)/u']        = ' - ';
+				$actions['/(?<=[.,;!?:])(?=[^ \n"\'.,;!?:\]\)])/u'] = ' ';
+				$actions['/[ ]*(?=[.,;!?:])/u']                     = '';	
 			}
 
 			// Кавычки-ёлочки
-			$actions['/(^|[\s;\(\[-])"/']            = '$1«';
-			$actions['/"([\s-\.!,:;\?\)\]\n\r]|$)/'] = '»$1';
-			$actions['/([^\s{])"([^\s}])/']            = '$1»$2';
+			$actions['/(^|[\s;\(\[-])"/']                      = '$1«';
+			$actions['/"([\s-\.!,:;\?\)\]\n\r]|$)/']           = '»$1';
+			$actions['/([^\s{])"([^\s}])/']                    = '$1»$2';
 
 			// Двойные+ пробелы
 			if (in_array('dblspace', $this->_actions)) {
-				$actions['/[ ]{2,}/']                       = ' ';
-			}
-
-			// Спецсимволы
-			if (in_array('special', $this->_actions)) {
-				$actions['/[\(\{][cс][\)\}]/ui'] = '©';
-				$actions['/\{\*}/']                = '^';
+				$actions['/[ ]{2,}/']                          = ' ';
 			}
 
 			// Тире, минус, интервал

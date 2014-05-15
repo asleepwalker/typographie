@@ -46,7 +46,22 @@
 				$actions['/\{pound}/']                         = '£';
 				$actions['/\{(yen|yuan)}/']                    = '¥';
 
+				$actions['/\{alpha\}/ui']                      = 'α';
+				$actions['/\{beta\}/ui']                       = 'β';
+				$actions['/\{gamma\}/ui']                      = 'γ';
+				$actions['/\{delta\}/ui']                      = 'δ';
+				$actions['/\{epsilon\}/ui']                    = 'ε';
+				$actions['/\{theta\}/ui']                      = 'θ';
+				$actions['/\{lambda\}/ui']                     = 'λ';
+				$actions['/\{mu\}/ui']                         = 'μ';
+				$actions['/\{nu\}/ui']                         = 'ν';
 				$actions['/\{pi\}/ui']                         = 'π';
+				$actions['/\{rho\}/ui']                        = 'ρ';
+				$actions['/\{sigma\}/ui']                      = 'σ';
+				$actions['/\{tau\}/ui']                        = 'τ';
+				$actions['/\{phi\}/ui']                        = 'φ';
+				$actions['/\{psi\}/ui']                        = 'Ψ';
+				$actions['/\{omega\}/ui']                      = 'ω';
 			}
 
 			// Математические символы

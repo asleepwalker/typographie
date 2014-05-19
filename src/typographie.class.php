@@ -28,10 +28,23 @@
 			$this->_actions = explode(',', $actionlist);
 		}
 
-		public function process($raw) {
-			if ($this->_in == 'html') { // HTML-mode
-				$pieces = array();
+		public function convert($raw) {
+			$text = $raw;
+			if (($this->_in == 'html') && ($this->_out == 'plain')) {
+				$text = preg_replace('/<[\s]*br[\s\/]*>/ui', "\n", $text);
+				$text = preg_replace('/<[\s]*p[^>]*>(.*?)<[\s]*\/[\s]*p[\s]*>/ui', "$1\n", $text);
+				$text = strip_tags($text);
+			}
+			elseif (($this->_in == 'plain') && ($this->_out == 'html')) {
+				// if (in_array('para', $this->_actions)) ...
+				// Newline makes a paragraph
+			}
+			return $text;
+		}
 
+		public function process($raw) {
+			if (($this->_in == 'html') && ($this->_out == 'html')) {
+				$pieces = array();
 				function preserve_html($pattern, &$pieces, $text) {
 					return preg_replace_callback($pattern, function ($match) use (&$pieces) {
 						$code = substr(md5($match[0]), 0, 8);
@@ -178,7 +191,7 @@
 				$text = preg_replace('/(»)+/', '»', $text);
 			}
 
-			if ($this->_in == 'html') { // HTML-mode
+			if (($this->_in == 'html') && ($this->_out == 'html')) {
 				foreach ($pieces as $code => $content) {
 					$text = str_replace('{'.$code.'}', $content, $text);
 				}

@@ -17,12 +17,13 @@
 	require_once('../typographie.class.php');
 	$engine = new typographie($_POST['in'], $_POST['out']);
 	$engine->actions($_POST['actions']);
-	$result = $engine->process($_POST['raw']);
+	$raw = $engine->convert($_POST['raw']);
+	$result = $engine->process($raw);
 
 	if ($_POST['highlight'] == 'enabled') {
 		require_once('finediff.class.php');
-		$opcodes = FineDiff::getDiffOpcodes($_POST['raw'], $result);
-		$result = FineDiff::renderDiffToHTMLFromOpcodes($_POST['raw'], $opcodes);
+		$opcodes = FineDiff::getDiffOpcodes($raw, $result);
+		$result = FineDiff::renderDiffToHTMLFromOpcodes($raw, $opcodes);
 		$result = preg_replace('/<del>.*?<\/del>(.*?)<ins>(.*?)<\/ins>/u', '<span class="fix">$1$2</span>', $result);
 		$result = preg_replace('/<del>(.*?)<\/del>/u', '', $result);
 		$result = preg_replace('/<ins>(.*?)<\/ins>/u', '<span class="fix">$1</span>', $result);

@@ -29,8 +29,26 @@
 		}
 
 		public function process($raw) {
-			$actions = array();
+			if ($this->_in == 'html') { // HTML-mode
+				$pieces = array();
+
+				function preserve_html($pattern, &$pieces, $text) {
+					return preg_replace_callback($pattern, function ($match) use (&$pieces) {
+						$code = substr(md5($match[0]), 0, 8);
+						$pieces[$code] = $match[0];
+						return '{'.$code.'}';
+					}, $text);
+				}
+
+				if (in_array('safehtml', $this->_actions)) {
+					$pattern = '/<[\s]*(code|pre)[^>]*>.*?<[\s]*\/[\s]*(code|pre)[\s]*>/ui';
+					$raw = preserve_html($pattern, $pieces, $raw);
+				}
+				$raw = preserve_html('/<[^>]+>/ui', $pieces, $raw);
+			}
+
 			$text = html_entity_decode($raw, ENT_QUOTES, 'UTF-8');
+			$actions = array();
 
 			// Спецсимволы
 			if (in_array('special', $this->_actions)) {
@@ -158,6 +176,12 @@
 				// Дублирующие кавычки сливаются в одни
 				$text = preg_replace('/(«)+/', '«', $text);
 				$text = preg_replace('/(»)+/', '»', $text);
+			}
+
+			if ($this->_in == 'html') { // HTML-mode
+				foreach ($pieces as $code => $content) {
+					$text = str_replace('{'.$code.'}', $content, $text);
+				}
 			}
 
 			return $text;

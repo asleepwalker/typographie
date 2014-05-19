@@ -14,7 +14,7 @@
 		exit;
 	}
 
-	require_once('../typographie.php');
+	require_once('../typographie.class.php');
 	$engine = new typographie($_POST['in'], $_POST['out']);
 	$engine->actions($_POST['actions']);
 	$result = $engine->process($_POST['raw']);
@@ -27,6 +27,7 @@
 		$result = preg_replace('/<del>(.*?)<\/del>/u', '', $result);
 		$result = preg_replace('/<ins>(.*?)<\/ins>/u', '<span class="fix">$1</span>', $result);
 	}
+	else $result = htmlspecialchars($result, ENT_QUOTES);
 
 	echo json_encode(array('response' => $result));
 ?>

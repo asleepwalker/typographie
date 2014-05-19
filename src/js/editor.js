@@ -11,7 +11,7 @@ var App = {};
 App.in = 'plain';
 App.out = 'plain';
 App.highlight = 'enabled';
-App.actions = {'list':['inquot','dash','dblspace','special','math','crrctpunc','crrctspecial','nbsp','hellip','safehtml']};
+App.actions = {'list':['live','inquot','dash','dblspace','special','math','crrctpunc','crrctspecial','nbsp','hellip','safehtml']};
 
 App.send = function() {
 	request = new XMLHttpRequest();

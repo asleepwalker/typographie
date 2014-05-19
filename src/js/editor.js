@@ -11,7 +11,7 @@ var App = {};
 App.in = 'plain';
 App.out = 'plain';
 App.highlight = 'enabled';
-App.actions = {'list':['live','inquot','dash','dblspace','special','math','crrctpunc','crrctspecial','nbsp','hellip','safehtml']};
+App.actions = {'list':['live','inquot','dash','dblspace','special','math','crrctpunc','crrctspecial','nbsp','hellip','pars','safehtml']};
 
 App.send = function() {
 	request = new XMLHttpRequest();
@@ -41,7 +41,7 @@ App.show = function(data) {
 
 App.error = function() {
 	window.App.state('free');
-	//error message
+	alert('Ошибка соединения. Попробуйте ещё раз или обратитесь к администратору.');
 };
 
 App.state = function(state) {

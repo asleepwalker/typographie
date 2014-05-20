@@ -9,7 +9,7 @@ HEADER #logo A { color: #2A7FFF; font-size: 26px !important; text-decoration: no
 #wrap #editor #input TEXTAREA { color: #111; display: block; font: 16px "Arial", sans-serif; height: 300px; margin-bottom: 10px; outline: none; resize: none; width: 100%; }
 #wrap #editor #output { background: #F8F8F8; border: 1px solid #DDD; border-top-color: #CFCFCF !important; float: right; height: 340px; padding: 8px 0.5%; width: 48%; }
 #wrap #editor #output #display { color: #444; font: 16px "Arial", sans-serif; height: 300px; margin-bottom: 10px; overflow-y: auto; white-space: pre-wrap; }
-#wrap #editor #output #display .fix { background: rgba(52, 174, 255, 0.15); }
+#wrap #editor #output #display .fix { background: #D9ECF8; }
 #wrap #editor #output #display .html { color: #999; font-size: 15px !important; }
 #wrap #editor .controls { height: 30px; padding: 0 5px; }
 #wrap #editor .controls #show_options.button { background: none; height: 28px; margin-left: 5px; }

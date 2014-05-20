@@ -32,7 +32,7 @@ FOOTER NAV UL LI#author A SPAN.icon { background: url(i/icons.png) no-repeat 0 -
 FOOTER NAV UL LI#author A:hover SPAN.icon { color: #000; }
 
 #dialog_wrapper { background: rgba(0,0,0,0.8); bottom: 0; left: 0; position: absolute; right: 0; top: 0; z-index: 9999; }
-#dialog_box { border: 8px solid rgba(0,0,0,0.6); border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; left: 50%; margin-left: -220px; margin-top: -210px; position: absolute; top: 50%; width: 440px; z-index: 10001; }
+#dialog_box { border: 8px solid rgba(0,0,0,0.6); border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; left: 50%; margin-left: -220px; margin-top: -200px; position: absolute; top: 50%; width: 440px; z-index: 10001; }
 #dialog_body { background: white; border: 1px solid #AAA; border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; padding: 15px 20px; } 
 #dialog_body #options { list-style: none; }
 #dialog_body #options HR { background-color: #CCC; border: 0px none; clear: both; color: #CCC; height: 1px; margin: 8px 0; }

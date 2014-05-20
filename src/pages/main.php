@@ -40,7 +40,6 @@
 			<hr>
 			<li><div data-option="pars"><div class="checkbox checked">&nbsp;</div><label>Разбивать на абзацы (<tt>&lt;p&gt;</tt>) пустой строкой</label></div></li>
 			<li><div data-option="safehtml"><div class="checkbox checked">&nbsp;</div><label>Не обрабатывать блоки <tt>&lt;code&gt;</tt> и <tt>&lt;pre&gt;</tt></label></div></li>
-			<li><div data-option="rawspecials"><div class="checkbox">&nbsp;</div><label>Превращать все спецсимволы в HTML-сущности</label></div></li>
 		</ul>
 		<div id="buttons"><button id="save" class="button submit bz">Завершить настройку</button></div>
 	</div></div>

@@ -28,8 +28,7 @@
 		$result = preg_replace('/<del>(.*?)<\/del>/u', '', $result);
 		$result = preg_replace('/<ins>(.*?)<\/ins>/u', '<span class="fix">$1</span>', $result);
 	}
-	else $result = htmlspecialchars($result, ENT_QUOTES);
-
+	else $result = htmlspecialchars($result, ENT_QUOTES, 'UTF-8');
 	if ($_POST['out'] == 'html') $result = preg_replace('/(&lt;.+?&gt;)/ui', '<span class="html">$1</span>', $result);
 
 	echo json_encode(array('response' => $result));

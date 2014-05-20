@@ -52,10 +52,10 @@
 				}, $text);
 			}
 			if ($this->_out == 'html') {
-				$text = preserve_html('/<[\/]{0,1}p[^>]*>/ui', $pieces, $text);
+				$text = preserve_html('/<[\/]{0,1}p>/ui', $pieces, $text);
 				if ($this->_in == 'html') {
 					if (in_array('safehtml', $this->_actions))
-						$text = preserve_html('/<(code|pre)[^>]*>.*?<\/(code|pre)>/ui', $pieces, $text);
+						$text = preserve_html('/<(code|pre)[^>]*>.*?<\/\1>/uis', $pieces, $text);
 					$text = preserve_html('/<[^>]+>/ui', $pieces, $text);
 				}
 			}
@@ -170,7 +170,7 @@
 
 			// Символ троеточия
 			if (in_array('hellip', $this->_actions))
-				$actions['/(\.){2,5}/']                        = '…';
+				$actions['/[.]{2,5}/']                        = '…';
 
 			// Выполняем операции замены
 			foreach ($actions as $key=>$val)
@@ -184,8 +184,8 @@
 				}
 			else {
 				// Дублирующие кавычки сливаются в одни
-				$text = preg_replace('/(«)+/', '«', $text);
-				$text = preg_replace('/(»)+/', '»', $text);
+				$text = preg_replace('/[«]+/', '«', $text);
+				$text = preg_replace('/[»]+/', '»', $text);
 			}
 
 			if (($this->_in == 'html') && ($this->_out == 'plain'))
@@ -194,7 +194,7 @@
 			foreach ($pieces as $code => $content)
 				$text = str_replace('{'.$code.'}', $content, $text);
 
-			return trim($text);
+			return $text;
 		}
 	};
 

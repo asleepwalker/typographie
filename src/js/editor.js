@@ -19,7 +19,8 @@ App.send = function() {
 	request.open('POST', 'engine/main.php', true);
 
 	request.onload = function() {
-		if (request.status >= 200 && request.status < 400) window.App.show(JSON.parse(request.responseText));
+		if (request.status >= 200 && request.status < 400)
+			window.App.show(JSON.parse(request.responseText));
 		else window.App.error();
 	};
 	request.onerror = window.App.error;
@@ -48,6 +49,7 @@ App.error = function() {
 App.state = function(state) {
 	window.App.now_state = state;
 	if (state == 'free') document.getElementById('loader').className = '';
+	else if (state == 'typing') document.getElementById('loader').className = 'visible sub';
 	else document.getElementById('loader').className = 'visible';
 };
 
@@ -63,6 +65,19 @@ App.actions.remove = function(action) {
 
 /* Submit button */
 document.getElementById('submit').onclick = App.send;
+
+/* Live mode */
+function liveProcess() {
+	if (window.App.actions.list.indexOf('live') != -1) {
+		window.App.state('typing');
+		clearTimeout(window.App.live);
+		window.App.live = window.setTimeout(function() {
+			window.App.send();
+		}, 1000);
+	}
+};
+document.getElementById('raw_input').onchange = liveProcess;
+document.getElementById('raw_input').onkeyup = liveProcess;
 
 /* Input mode change */
 var input_modes = document.getElementById('input_mode').getElementsByTagName('li');

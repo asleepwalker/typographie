@@ -25,6 +25,7 @@ HEADER #logo A { color: #2A7FFF; font-size: 26px !important; text-decoration: no
 FOOTER { background: #EEE; border-top: 1px solid #DDD; bottom: 0; height: 30px; position: fixed; width: 100%; }
 FOOTER #loader { background: url(i/loader.gif) no-repeat; display: none; height: 15px; left: 10px; position: absolute; top: 7px; width: 165px; }
 FOOTER #loader.visible { display: block; }
+FOOTER #loader.visible.sub { opacity: 0.2; }
 FOOTER A { color: #15C; font: 13px/30px "Arial", sans-serif; text-decoration: none; }
 FOOTER A:hover { text-decoration: underline; }
 FOOTER NAV { text-align: right; }

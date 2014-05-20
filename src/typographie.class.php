@@ -29,17 +29,18 @@
 		}
 
 		public function convert($raw) {
-			$text = $raw;
 			if (($this->_in == 'html') && ($this->_out == 'plain')) {
-				$text = preg_replace('/<[\s]*br[\s\/]*>/ui', "\n", $text);
-				$text = preg_replace('/<[\s]*p[^>]*>(.*?)<[\s]*\/[\s]*p[\s]*>/ui', "$1\n", $text);
-				$text = strip_tags($text);
+				$raw = preg_replace('/<br[\s\/]*>/ui', "\n", $raw);
+				$raw = preg_replace('/<p[^>]*>(.*?)<\/p>[\s]*/usi', "$1\n\n", $raw);
+				$raw = strip_tags($raw);
 			}
 			elseif (($this->_in == 'plain') && ($this->_out == 'html')) {
-				// if (in_array('para', $this->_actions)) ...
-				// Newline makes a paragraph
+				if (in_array('pars', $this->_actions)) {
+					$raw = preg_replace('/^(.+?)$/uim', "<p>$1</p>", $raw);
+					$raw = preg_replace('/<\/p>\n<p>/ui', "<br>\n", $raw);
+				} else $raw = preg_replace('/[\n]/ui', "<br>\n", $raw);
 			}
-			return $text;
+			return $raw;
 		}
 
 		public function process($raw) {
@@ -146,7 +147,7 @@
 			if (in_array('crrctpunc', $this->_actions)) {
 				if (in_array('dash', $this->_actions)) $actions['/[-]{2,5}/'] = '—';
 				$actions['/([ ]+[-—][ ]*)|([ ]*[-—][ ]+)/u']        = ' - ';
-				$actions['/(?<=[.,;!?:])(?=[^ \n"\'.,;!?:\]\)])/u'] = ' ';
+				$actions['/(?<=[.,;!?:])(?=[^ \n"\'.,;!?:\]\)<])/u'] = ' ';
 				$actions['/[ ]*(?=[.,;!?:])/u']                     = '';	
 			}
 
@@ -197,6 +198,7 @@
 				}
 			}
 
+			$text = trim($text);
 			return $text;
 		}
 	};

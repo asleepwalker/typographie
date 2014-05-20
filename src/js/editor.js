@@ -11,6 +11,7 @@ var App = {};
 App.in = 'plain';
 App.out = 'plain';
 App.highlight = 'enabled';
+App.now_state = 'free';
 App.actions = {'list':['live','inquot','dash','dblspace','special','math','crrctpunc','crrctspecial','nbsp','hellip','pars','safehtml']};
 
 App.send = function() {
@@ -46,8 +47,9 @@ App.error = function() {
 
 App.state = function(state) {
 	window.App.now_state = state;
-	//visual
-}; App.state('free');
+	if (state == 'free') document.getElementById('loader').className = '';
+	else document.getElementById('loader').className = 'visible';
+};
 
 App.actions.add = function(action) {
 	if (App.actions.list.indexOf(action) == -1)

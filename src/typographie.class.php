@@ -36,7 +36,6 @@
 				if (in_array('pars', $this->_actions)) {
 					$raw = preg_replace('/^(.+?)$/uim', "<p>$1</p>", $raw);
 					$raw = preg_replace('/<\/p>\n<p>/ui', "<br>\n", $raw);
-					$raw = preg_replace('/(?<=<\/p>)[\n]+(?=<p>)/ui', "\n<br>\n", $raw);
 				} else $raw = preg_replace('/[\n]/ui', "<br>\n", $raw);
 			}
 			return $raw;

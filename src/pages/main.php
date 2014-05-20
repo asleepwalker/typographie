@@ -29,16 +29,16 @@
 			<li><div data-option="live"><div class="checkbox checked">&nbsp;</div><label>«Живое» типографирование</label></div></li>
 			<hr>
 			<li><div data-option="inquot"><div class="checkbox checked">&nbsp;</div><label>Вложенные кавычки: «„“»</label></div></li>
-			<li><div data-option="dash"><div class="checkbox checked">&nbsp;</div><label>Тире, минус, интервал вместо дефиса</label></li>
+			<li><div data-option="dashes"><div class="checkbox checked">&nbsp;</div><label>Тире, минус, интервал вместо дефиса</label></li>
 			<li><div data-option="dblspace"><div class="checkbox checked">&nbsp;</div><label>Исправлять двойные+ пробелы</label></div></li>
-			<li><div data-option="special"><div class="checkbox checked">&nbsp;</div><label>Условные знаки: <b>(с)</b> <small>&gt;</small> <b>©</b>, <b>(тм)</b> <small>&gt;</small> <b>™</b>, <b>{*}</b> <small>&gt;</small> <b>°</b>...</label></div></li>
-			<li><div data-option="math"><div class="checkbox checked">&nbsp;</div><label>Математические знаки: <b>+-</b> <small>&gt;</small> <b>&plusmn;</b>, <b>{^2}</b> <small>&gt;</small> <b>&sup2;</b>, <b>{!=}</b> <small>&gt;</small> <b>≠</b> ...</label></div></li>
-			<li><div data-option="crrctpunc"><div class="checkbox checked">&nbsp;</div><label>Исправлять отступы в пунктуации</label></div></li>
-			<li><div data-option="crrctspecial"><div class="checkbox checked">&nbsp;</div><label>Исправлять отступы вокруг спецсимволов</label></div></li>
+			<li><div data-option="specials"><div class="checkbox checked">&nbsp;</div><label>Условные знаки: <b>(с)</b> <small>&gt;</small> <b>©</b>, <b>(тм)</b> <small>&gt;</small> <b>™</b>, <b>{*}</b> <small>&gt;</small> <b>°</b>...</label></div></li>
+			<li><div data-option="mathchars"><div class="checkbox checked">&nbsp;</div><label>Математические знаки: <b>+-</b> <small>&gt;</small> <b>&plusmn;</b>, <b>{^2}</b> <small>&gt;</small> <b>&sup2;</b>, <b>{!=}</b> <small>&gt;</small> <b>≠</b> ...</label></div></li>
+			<li><div data-option="punctuation"><div class="checkbox checked">&nbsp;</div><label>Исправлять отступы в пунктуации</label></div></li>
+			<li><div data-option="specialspaces"><div class="checkbox checked">&nbsp;</div><label>Исправлять отступы вокруг спецсимволов</label></div></li>
 			<li><div data-option="nbsp"><div class="checkbox checked">&nbsp;</div><label>Не «отрывать» короткие слова</label></div></li>
 			<li><div data-option="hellip"><div class="checkbox checked">&nbsp;</div><label>Исправлять многоточие на спецсимвол</label></div></li>
 			<hr>
-			<li><div data-option="pars"><div class="checkbox checked">&nbsp;</div><label>Разбивать на абзацы (<tt>&lt;p&gt;</tt>) пустой строкой</label></div></li>
+			<li><div data-option="paragraphs"><div class="checkbox checked">&nbsp;</div><label>Разбивать на абзацы (<tt>&lt;p&gt;</tt>) пустой строкой</label></div></li>
 			<li><div data-option="safehtml"><div class="checkbox checked">&nbsp;</div><label>Не обрабатывать блоки <tt>&lt;code&gt;</tt> и <tt>&lt;pre&gt;</tt></label></div></li>
 		</ul>
 		<div id="buttons"><button id="save" class="button submit bz">Завершить настройку</button></div>

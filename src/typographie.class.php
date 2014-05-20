@@ -33,7 +33,7 @@
 			elseif (($this->_in == 'plain') && ($this->_out == 'html')) {
 				$raw = str_replace('<', '&lt;', $raw);
 				$raw = str_replace('>', '&gt;', $raw);
-				if (in_array('pars', $this->_actions)) {
+				if (in_array('paragraphs', $this->_actions)) {
 					$raw = preg_replace('/^(.+?)$/uim', "<p>$1</p>", $raw);
 					$raw = preg_replace('/<\/p>\n<p>/ui', "<br>\n", $raw);
 				} else $raw = preg_replace('/[\n]/ui', "<br>\n", $raw);
@@ -63,7 +63,7 @@
 			$actions = array();
 
 			// Спецсимволы
-			if (in_array('special', $this->_actions)) {
+			if (in_array('specials', $this->_actions)) {
 				$actions['/\{([\'"])}/']                       = '$1';
 				$actions['/(\([cс]\))|(\{copy\})/ui']          = '©';
 				$actions['/(\(r\))|(\{reg\})/ui']              = '®';
@@ -95,7 +95,7 @@
 			}
 
 			// Математические символы
-			if (in_array('math', $this->_actions)) {
+			if (in_array('mathchars', $this->_actions)) {
 				$actions['/\{!=}/']                            = '≠';
 				$actions['/\{~}/']                             = '≈';
 				$actions['/\{equal}/']                         = '≡';
@@ -142,8 +142,8 @@
 			}
 
 			// Отступы в пунктуации
-			if (in_array('crrctpunc', $this->_actions)) {
-				if (in_array('dash', $this->_actions)) $actions['/[-]{2,5}/'] = '—';
+			if (in_array('punctuation', $this->_actions)) {
+				if (in_array('dashes', $this->_actions)) $actions['/[-]{2,5}/'] = '—';
 				$actions['/([ ]+[-—][ ]*)|([ ]*[-—][ ]+)/u']   = ' - ';
 				$actions['/(?<=[.,!?:)])(?=[^ \n"\'.,;!?&:\]\)<{)])/u'] = ' ';
 				$actions['/[ ]*(?=[.,;!?:])/u']                = '';
@@ -151,7 +151,7 @@
 			}
 
 			// Отступы вокруг спецсимволов
-			if (in_array('crrctspecial', $this->_actions)) {
+			if (in_array('specialspaces', $this->_actions)) {
 				$actions['/(?<=№)[\s]*(?=[\d])/']              = ' ';
 				$actions['/(?<=[\d])[\s]*(?=°[CСF])/u']        = ' ';
 			}
@@ -166,7 +166,7 @@
 				$actions['/[ ]{2,}/']                          = ' ';
 
 			// Тире, минус, интервал
-			if (in_array('dash', $this->_actions)) {
+			if (in_array('dashes', $this->_actions)) {
 				$actions['/(^|\n|["„«])--?(\s)/u']             = '$1—$2';
 				$actions['/(\s)--?(\s)/']                      = ' —$2';
 			}

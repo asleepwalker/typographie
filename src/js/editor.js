@@ -12,7 +12,7 @@ App.in = 'plain';
 App.out = 'plain';
 App.highlight = 'enabled';
 App.now_state = 'free';
-App.actions = {'list':['live','inquot','dash','dblspace','special','math','crrctpunc','crrctspecial','nbsp','hellip','pars','safehtml']};
+App.actions = {'list':['live','inquot','dashes','dblspace','specials','mathchars','punctuation','specialspaces','nbsp','hellip','paragraphs','safehtml']};
 
 App.send = function() {
 	request = new XMLHttpRequest();

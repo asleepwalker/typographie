@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title><?php echo $title; ?></title>
+		<title><?php if (isset($title)) echo $title.' | '; ?>Typographie</title>
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>

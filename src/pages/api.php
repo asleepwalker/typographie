@@ -1,9 +1,9 @@
-<?php $title = 'API | Typographie'; include('header.php'); ?>
+<?php $title = 'API'; include('header.php'); ?>
 <div id="help">
-	<nav>
-		<?php include('help.php') ?>
-	</nav>
-	<div id="content">
+	<?php include('help.php') ?>
+		<article>
+			
+		</article>
 	</div>
 </div>
 <?php include('footer.php') ?>

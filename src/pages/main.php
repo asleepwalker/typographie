@@ -1,4 +1,4 @@
-<?php $title = 'Typographie'; include('header.php'); ?>
+<?php include('header.php'); ?>
 <div id="top"></div>
 <div id="editor">
 	<div id="input">

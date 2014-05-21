@@ -1,4 +1,4 @@
-<?php $title = 'О сервисе'; include('header.php'); ?>
+<?php $title = 'Контакты'; include('header.php'); ?>
 <div id="help">
 	<?php include('help.php') ?>
 		<article>

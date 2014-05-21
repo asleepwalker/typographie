@@ -4,7 +4,8 @@ HEADER { background: #F3F3F3; border-bottom: 2px dashed #8BB9FF; height: 60px; }
 HEADER #logo { color: #00588A; font: 22px/40px "Georgia", serif; height: 40px; padding: 10px 20px; text-shadow: #FFF 1px 1px 1px; white-space: nowrap; }
 HEADER #logo A { color: #2A7FFF; font-size: 26px !important; text-decoration: none; }
 
-#wrap { padding: 50px; }
+#wrap { padding: 30px 50px; }
+#wrap #editor { padding-top: 20px; }
 #wrap #editor #input { border: 1px solid #CCC; border-top-color: #B2B2B2 !important; float: left; height: 340px; padding: 8px 0.5%; -webkit-box-shadow: inset 0px 0px 4px 0px rgba(0,0,0,0.2); -moz-box-shadow: inset 0px 0px 4px 0px rgba(0,0,0,0.2); box-shadow: inset 0px 0px 4px 0px rgba(0,0,0,0.2); width: 48%; }
 #wrap #editor #input TEXTAREA { color: #111; display: block; font: 16px "Arial", sans-serif; height: 300px; margin-bottom: 10px; outline: none; resize: none; width: 100%; }
 #wrap #editor #output { background: #F8F8F8; border: 1px solid #DDD; border-top-color: #CFCFCF !important; float: right; height: 340px; padding: 8px 0.5%; width: 48%; }
@@ -21,6 +22,19 @@ HEADER #logo A { color: #2A7FFF; font-size: 26px !important; text-decoration: no
 #wrap #editor .controls #highlight LABEL { color: #333; font: 14px "Arial", sans-serif; }
 #wrap #editor .controls #highlight:hover #hcheckbox { border-color: #999 !important; }
 #wrap #editor .controls #highlight:hover LABEL { color: #222 !important; }
+#wrap #help { margin: 0 auto 30px; width: 900px; }
+#wrap #help NAV { float: left; padding: 15px 0; width: 175px; }
+#wrap #help NAV UL { list-style: none; }
+#wrap #help NAV UL LI { height: 26px; padding-left: 6px; }
+#wrap #help NAV UL LI.active { background: #E5E5E5; }
+#wrap #help NAV UL LI.sub { padding-left: 14px; }
+#wrap #help NAV UL LI A { color: #005DE9; font: 15px/26px "Arial", sans-serif; line-height: 27px; text-decoration: none; }
+#wrap #help NAV UL LI.active A { color: #000;}
+#wrap #help NAV UL LI A:before { color: #888; content: '▸'; padding-right: 5px; }
+#wrap #help NAV UL LI A.back:before { content: '▴'; }
+#wrap #help #content { margin-left: 200px; }
+#wrap #help #content H1 { color: #555; font: 30px "Arial", sans-serif; margin-bottom: 15px; }
+#wrap #help #content ARTICLE P { color: #111; font: 14px/20px "Arial", sans-serif; margin-bottom: 12px; }
 
 FOOTER { background: #EEE; border-top: 1px solid #DDD; bottom: 0; height: 30px; position: fixed; width: 100%; }
 FOOTER #loader { background: url(i/loader.gif) no-repeat; display: none; height: 15px; left: 10px; position: absolute; top: 7px; width: 165px; }

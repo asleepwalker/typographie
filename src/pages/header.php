@@ -7,6 +7,6 @@
 	</head>
 	<body>
 		<header>
-			<div id="logo">&laquo;<a href="/">Typographie</a>&raquo;&nbsp;&mdash;&nbsp;подготовка текстов к веб-публикации онлайн</div>
+			<div id="logo">&laquo;<a href="/">Typographie</a>&raquo;&nbsp;&mdash; подготовка текстов к веб-публикации онлайн</div>
 		</header>
 		<div id="wrap">

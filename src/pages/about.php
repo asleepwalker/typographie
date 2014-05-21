@@ -2,7 +2,6 @@
 <div id="help">
 	<?php include('help.php') ?>
 		<article>
-			
 		</article>
 	</div>
 </div>

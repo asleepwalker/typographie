@@ -3,6 +3,11 @@
 HEADER { background: #F3F3F3; border-bottom: 2px dashed #8BB9FF; height: 60px; }
 HEADER #logo { color: #00588A; font: 22px/40px "Georgia", serif; height: 40px; padding: 10px 20px; text-shadow: #FFF 1px 1px 1px; white-space: nowrap; }
 HEADER #logo A { color: #2A7FFF; font-size: 26px !important; text-decoration: none; }
+HEADER NAV { float: right; padding: 8px 30px 0 10px; }
+HEADER NAV UL { list-style: none; }
+HEADER NAV UL LI { height: 22px; }
+HEADER NAV UL LI A { color: #15C; font: 13px/22px "Arial", sans-serif; text-decoration: none; }
+HEADER NAV UL LI A:before { color: #888; content: '▸'; padding-right: 5px; }
 
 #wrap { padding: 30px 50px; }
 #wrap #editor { padding-top: 20px; }

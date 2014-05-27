@@ -39,7 +39,11 @@ HEADER NAV UL LI A:before { color: #888; content: '▸'; padding-right: 5px; }
 #wrap #help NAV UL LI A.back:before { content: '▴'; }
 #wrap #help #content { margin-left: 200px; }
 #wrap #help #content H1 { color: #555; font: 30px "Arial", sans-serif; margin-bottom: 15px; }
-#wrap #help #content ARTICLE P { color: #111; font: 14px/20px "Arial", sans-serif; margin-bottom: 12px; }
+#wrap #help #content ARTICLE P { color: #111; font: 14px/21px "Arial", sans-serif; margin-bottom: 16px; }
+#wrap #help #content ARTICLE A { color: #15C; text-decoration: none; }
+#wrap #help #content ARTICLE A:hover { text-decoration: underline; }
+#wrap #help #content ARTICLE UL { list-style-position: inside; margin-bottom: 16px; }
+#wrap #help #content ARTICLE UL LI { margin-bottom: 5px; }
 
 FOOTER { background: #EEE; border-top: 1px solid #DDD; bottom: 0; height: 30px; position: fixed; width: 100%; }
 FOOTER #loader { background: url(i/loader.gif) no-repeat; display: none; height: 15px; left: 10px; position: absolute; top: 7px; width: 165px; }

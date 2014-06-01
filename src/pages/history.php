@@ -2,7 +2,7 @@
 <div id="help">
 	<?php include('help.php') ?>
 		<article>
-			
+			<p><b>02.06.2014</b>: Релиз сервиса <b>«Typographie»</b>, версия 1.0.</p>
 		</article>
 	</div>
 </div>

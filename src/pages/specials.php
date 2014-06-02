@@ -54,21 +54,22 @@
 					<td>{!=} → ≠</td>
 					<td>{~} → ≈</td>
 					<td>{equal} → ≡</td>
-					<td>+- → ±</td>
-				<tr>
-				<tr>
-					<td>{part} → ∂</td>
-					<td>{any} → ∀</td>
-					<td>{exist} → ∃</td>
 					<td>{empty} → ∅</td>
 				<tr>
 				<tr>
+					<td>{any} → ∀</td>
+					<td>{exist} → ∃</td>
 					<td>{infinity} → ∞</td>
+					<td>{part} → ∂</td>
+				<tr>
+				<tr>
 					<td>{belong} → ∈</td>
 					<td>{!belong} → ∉</td>
+					<td>+- → ±</td>
+					<td>{-} → –</td>
+				<tr>
+				<tr>
 					<td>{ang} → ∠</td>
-				<tr>
-				<tr>
 					<td>{v} → √</td>
 					<td>{v3} → ∛</td>
 					<td>{v4} → ∜</td>

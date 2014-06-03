@@ -48,6 +48,7 @@ HEADER NAV UL LI A:before { color: #888; content: '▸'; padding-right: 5px; }
 #wrap #help #content ARTICLE CODE { background: #EEE; display: block; margin-bottom: 15px; padding: 10px; }
 #wrap #help #content ARTICLE TABLE.specials { width: 100%; }
 #wrap #help #content ARTICLE TABLE.specials TD { padding-bottom: 18px; width: 25%; }
+#wrap #help #content ARTICLE TABLE.specials TD SPAN { background: #FFE5E5; }
 
 FOOTER { background: #EEE; border-top: 1px solid #DDD; bottom: 0; height: 30px; position: fixed; width: 100%; }
 FOOTER #loader { background: url(i/loader.gif) no-repeat; display: none; height: 15px; left: 10px; position: absolute; top: 7px; width: 165px; }

@@ -13,9 +13,9 @@
 				<tr>
 				<tr>
 					<td>{*}, {deg} → °</td>
-					<td>123* → 123°</td>
-					<td>123' → 123′</td>
-					<td>123" → 123″</td>
+					<td><span>123* → 123°</span></td>
+					<td><span>123' → 123′</span></td>
+					<td><span>123" → 123″</span></td>
 				<tr>
 				<tr>
 					<td>{euro} → €</td>

@@ -30,6 +30,7 @@
 			<hr>
 			<li><div data-option="inquot"><div class="checkbox checked">&nbsp;</div><label>Вложенные кавычки: «„“»</label></div></li>
 			<li><div data-option="dashes"><div class="checkbox checked">&nbsp;</div><label>Тире, минус, интервал вместо дефиса</label></li>
+			<li><div data-option="angles"><div class="checkbox checked">&nbsp;</div><label>Градусы, минуты/футы, секунды/дюймы</label></li>
 			<li><div data-option="dblspace"><div class="checkbox checked">&nbsp;</div><label>Исправлять двойные+ пробелы</label></div></li>
 			<li><div data-option="specials"><div class="checkbox checked">&nbsp;</div><label>Условные знаки: <b>(с)</b> <small>&gt;</small> <b>©</b>, <b>(тм)</b> <small>&gt;</small> <b>™</b>, <b>{*}</b> <small>&gt;</small> <b>°</b>...</label></div></li>
 			<li><div data-option="mathchars"><div class="checkbox checked">&nbsp;</div><label>Математические знаки: <b>+-</b> <small>&gt;</small> <b>&plusmn;</b>, <b>{^2}</b> <small>&gt;</small> <b>&sup2;</b>, <b>{!=}</b> <small>&gt;</small> <b>≠</b> ...</label></div></li>

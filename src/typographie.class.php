@@ -102,6 +102,7 @@
 				$actions['/\{<=}/']                            = '⩽';
 				$actions['/\{=>}/']                            = '⩾';
 				$actions['/\+-/']                              = '±';
+				$actions['/\{-}/']                             = '–';
 				$actions['/<->/']                              = '↔';
 				$actions['/<=>/']                              = '⇔';
 				$actions['/<-/']                               = '←';
@@ -150,6 +151,12 @@
 				$actions['/(?<=[.,])[\s]{0,1}[-—](?=[ ])/']    = '—';
 			}
 
+			// Градусы, минуты/футы, секунды/дюймы, ч.1
+			if (in_array('angles', $this->_actions)) {
+				$actions['/([\d.]+)\*/']                       = '$1°';
+				$actions['/([\d.]+)\'/']                       = '$1′';
+			}
+
 			// Отступы вокруг спецсимволов
 			if (in_array('specialspaces', $this->_actions)) {
 				$actions['/([№§])[\s]*(?=[\d])/']              = '$1 ';
@@ -194,6 +201,13 @@
 				// Дублирующие кавычки сливаются в одни
 				$text = preg_replace('/[«]+/', '«', $text);
 				$text = preg_replace('/[»]+/', '»', $text);
+			}
+
+			// Градусы, минуты/футы, секунды/дюймы, ч.2
+			if (in_array('angles', $this->_actions)) {
+				$text = preg_replace('/(?<=»)([^«]+?[\d.]+)»/', '$1″', $text);
+				if (strpos($text, '«') === false)
+					$text = preg_replace('/([\d.]+)»/', '$1″', $text);
 			}
 
 			if (($this->_in == 'html') && ($this->_out == 'plain'))

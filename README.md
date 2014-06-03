@@ -12,13 +12,15 @@ API сервиса «Typographie» позволяет воспользовать
 
 [Подробнее на сайте.](http://typographie.ru/?api)
 
-## Использование класса
+## Локальное применение
+
+Добавьте в папку PHP-класс Typographie: [typographie.class.php](http://github.com/asleepwalker/typographie/blob/master/typographie.class.php)
 
 ```
 require_once('../typographie.class.php');
-$engine = new typographie($inmode, $outmode);
-$engine->actions($actionlist);
-$text = $engine->convert($rawtext);
+$engine = new typographie($inmode, $outmode); // режимы бывают: plain или html
+$engine->actions($actionlist); // список действий через запятую
+$text = $engine->convert($rawtext); // если режим ввода и вывода одинаковый - можно опустить
 $result = $engine->process($rawtext);
 ```
 

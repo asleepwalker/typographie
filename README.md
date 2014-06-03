@@ -9,7 +9,18 @@
 ## API
 
 API сервиса «Typographie» позволяет воспользоваться его преимуществами, независимо от того, пишите вы веб-приложение, десктопное или для мобильных устройств: всё, что вам понадобится — это доступ к интернету.
+
 [Подробнее на сайте.](http://typographie.ru/?api)
+
+## Использование класса
+
+```
+require_once('../typographie.class.php');
+$engine = new typographie($inmode, $outmode);
+$engine->actions($actionlist);
+$text = $engine->convert($rawtext);
+$result = $engine->process($rawtext);
+```
 
 ## Контакты
 

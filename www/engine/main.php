@@ -24,8 +24,8 @@
 
 	if ($_POST['highlight'] == 'enabled') {
 		require_once('finediff.class.php');
-		$opcodes = FineDiff::getDiffOpcodes($raw, $result);
-		$result = FineDiff::renderDiffToHTMLFromOpcodes($raw, $opcodes);
+		$opcodes = FineDiff::getDiffOpcodes($_POST['raw'], $result);
+		$result = FineDiff::renderDiffToHTMLFromOpcodes($_POST['raw'], $opcodes);
 		$result = preg_replace('/<del>.*?<\/del>(.*?)<ins>(.*?)<\/ins>/u', '<span class="fix">$1$2</span>', $result);
 		$result = preg_replace('/<del>(.*?)<\/del>/u', '', $result);
 		$result = preg_replace('/<ins>(.*?)<\/ins>/u', '<span class="fix">$1</span>', $result);

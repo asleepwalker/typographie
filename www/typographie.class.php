@@ -11,55 +11,11 @@
 
 	class Typographie {
 
-		private $_in;
-		private $_out;
 		private $_actions;
-
-		public function __construct($in = 'plain', $out = 'plain') {
-			$this->_in = $in;
-			$this->_out = $out;
-		}
-
-		public function actions($actionlist) {
-			$this->_actions = explode(',', $actionlist);
-		}
-
-		public function convert($raw) {
-			if (($this->_in == 'html') && ($this->_out == 'plain')) {
-				$raw = preg_replace('/[\n]*<br[\s\/]*>[\n]*/ui', "\n", $raw);
-				$raw = preg_replace('/<p[^>]*>(.*?)<\/p>[\s]*/usi', "$1\n\n", $raw);
-				$raw = strip_tags($raw);
-			}
-			elseif (($this->_in == 'plain') && ($this->_out == 'html')) {
-				$raw = str_replace('<', '&lt;', $raw);
-				$raw = str_replace('>', '&gt;', $raw);
-				if (in_array('paragraphs', $this->_actions)) {
-					$raw = preg_replace('/^(.+?)$/uim', "<p>$1</p>", $raw);
-					$raw = preg_replace('/<\/p>\n<p>/ui', "<br>\n", $raw);
-				} else $raw = preg_replace('/[\n]/ui', "<br>\n", $raw);
-			}
-			return $raw;
-		}
+		public function __construct($actionlist) { $this->actions($actionlist); }
+		public function actions($actionlist) { $this->_actions = explode(',', $actionlist); }
 
 		public function process($text) {
-
-			$pieces = array();
-			function preserve_html($pattern, &$pieces, $text) {
-				return preg_replace_callback($pattern, function ($match) use (&$pieces) {
-					$code = substr(md5($match[0]), 0, 8);
-					$pieces[$code] = $match[0];
-					return '{'.$code.'}';
-				}, $text);
-			}
-			if ($this->_out == 'html') {
-				$text = preserve_html('/<[\/]{0,1}p>/ui', $pieces, $text);
-				if ($this->_in == 'html') {
-					if (in_array('safehtml', $this->_actions))
-						$text = preserve_html('/<(code|pre)[^>]*>.*?<\/\1>/uis', $pieces, $text);
-					$text = preserve_html('/<[^>]+>/ui', $pieces, $text);
-				}
-			}
-
 			$actions = array();
 
 			// Спецсимволы
@@ -209,12 +165,6 @@
 				if (strpos($text, '«') === false)
 					$text = preg_replace('/([\d.]+)»/', '$1″', $text);
 			}
-
-			if (($this->_in == 'html') && ($this->_out == 'plain'))
-				$text = html_entity_decode($text, ENT_COMPAT, 'UTF-8');
-
-			foreach ($pieces as $code => $content)
-				$text = str_replace('{'.$code.'}', $content, $text);
 
 			return $text;
 		}

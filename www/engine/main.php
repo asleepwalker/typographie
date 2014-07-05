@@ -15,10 +15,12 @@
 	}
 
 	require_once('../typographie.class.php');
-	$engine = new typographie($_POST['in'], $_POST['out']);
-	$engine->actions($_POST['actions']);
-	$raw = $engine->convert($_POST['raw']);
+	require_once('converter.class.php');
+	$engine = new Typographie($_POST['actions']);
+	$device = new Converter($_POST['in'], $_POST['out']);
+	$raw = $device->prepare($_POST['raw']);
 	$result = $engine->process($raw);
+	$result = $device->ready($result);
 
 	if ($_POST['highlight'] == 'enabled') {
 		require_once('finediff.class.php');

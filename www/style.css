@@ -1,4 +1,5 @@
 * { border: 0; border-spacing: 0; margin: 0; padding: 0; }
+.clearfix { clear: both; }
 
 HEADER { background: #F3F3F3; border-bottom: 2px dashed #8BB9FF; height: 60px; }
 HEADER #logo { color: #00588A; font: 22px/40px "Georgia", serif; height: 40px; padding: 10px 20px; text-shadow: #FFF 1px 1px 1px; white-space: nowrap; }
@@ -9,7 +10,7 @@ HEADER NAV UL LI { height: 22px; }
 HEADER NAV UL LI A { color: #15C; font: 13px/22px "Arial", sans-serif; text-decoration: none; }
 HEADER NAV UL LI A:before { color: #888; content: '▸'; padding-right: 5px; }
 
-#wrap { padding: 30px 50px; }
+#wrap { padding: 30px 50px 70px; }
 #wrap #editor { padding-top: 20px; }
 #wrap #editor #input { border: 1px solid #CCC; border-top-color: #B2B2B2 !important; float: left; height: 340px; padding: 8px 0.5%; -webkit-box-shadow: inset 0px 0px 4px 0px rgba(0,0,0,0.2); -moz-box-shadow: inset 0px 0px 4px 0px rgba(0,0,0,0.2); box-shadow: inset 0px 0px 4px 0px rgba(0,0,0,0.2); width: 48%; }
 #wrap #editor #input TEXTAREA { color: #111; display: block; font: 16px "Arial", sans-serif; height: 300px; margin-bottom: 10px; outline: none; resize: none; width: 100%; }

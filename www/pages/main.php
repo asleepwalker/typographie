@@ -23,6 +23,7 @@
 		</div>
 	</div>
 </div>
+<div class="clearfix"></div>
 <div id="dialog_wrapper" style="display: none">
 	<div id="dialog_box"><div id="dialog_body">
 		<ul id="options">

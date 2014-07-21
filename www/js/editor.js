@@ -191,3 +191,21 @@ for (var i = 0; i < options.length; i++) {
 		}
 	};
 }
+
+/* Adaptation for browser window size */
+function adaptationResize() {
+	var w = window,
+	    d = document,
+	    e = d.documentElement,
+	    g = d.getElementsByTagName('body')[0],
+	    y = w.innerHeight|| e.clientHeight || g.clientHeight;
+	h = y/2;
+	if (h > (y-300)) h = y-300;
+	if (h < 200) h = 200;
+	document.getElementById('input').style.height = h+'px';
+	document.getElementById('output').style.height = h+'px';
+	document.getElementById('raw_input').style.height = (h-40)+'px';
+	document.getElementById('display').style.height = (h-40)+'px';
+}
+window.onresize = adaptationResize;
+adaptationResize();

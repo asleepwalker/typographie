@@ -1,5 +1,14 @@
 <?php
 
+	/*
+		Typographie, v1.1
+		https://github.com/asleepwalker/typographie
+
+		by Artyom "Sleepwalker" Fedosov, 2014
+		http://me.asleepwalker.ru/
+		mail@asleepwalker.ru
+	*/
+
 	class Converter {
 
 		private $_in;
@@ -7,7 +16,7 @@
 		private $_actions;
 		private $_preserved;
 
-		public function __construct($in = 'plain', $out = 'plain', $actions = '') {
+		public function __construct($in, $out, $actions) {
 			$this->_in = $in;
 			$this->_out = $out;
 			$this->_actions = explode(',', $actions);

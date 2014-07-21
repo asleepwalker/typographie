@@ -17,21 +17,27 @@
 	require_once('typographie.class.php');
 	require_once('converter.class.php');
 	$engine = new Typographie($_POST['actions']);
-	$device = new Converter($_POST['in'], $_POST['out'], $_POST['actions']);
-	$raw = $device->prepare($_POST['raw']);
+	$converter = new Converter($_POST['in'], $_POST['out'], $_POST['actions']);
+	$raw = $converter->prepare($_POST['raw']);
 	$result = $engine->process($raw);
-	$result = $device->ready($result);
+	$result = $converter->ready($result);
 
 	if ($_POST['highlight'] == 'enabled') {
 		require_once('finediff.class.php');
 		$opcodes = FineDiff::getDiffOpcodes($_POST['raw'], $result);
-		$result = FineDiff::renderDiffToHTMLFromOpcodes($_POST['raw'], $opcodes);
-		$result = preg_replace('/<del>.*?<\/del>(.*?)<ins>(.*?)<\/ins>/u', '<span class="fix">$1$2</span>', $result);
-		$result = preg_replace('/<del>(.*?)<\/del>/u', '', $result);
-		$result = preg_replace('/<ins>(.*?)<\/ins>/u', '<span class="fix">$1</span>', $result);
+		$result = '';
+		FineDiff::renderFromOpcodes($_POST['raw'], $opcodes, function($opcode, $from, $from_offset, $from_len) use (&$result) {
+			if ($opcode === 'c') {
+				$result .= htmlspecialchars(mb_substr($from, $from_offset, $from_len));
+			}
+			else if ($opcode === 'i') {
+	 			$result .= '<span class="fix">'.htmlspecialchars(mb_substr($from, $from_offset, $from_len), ENT_QUOTES).'</span>';
+			}
+		});
 	}
 	else $result = htmlspecialchars($result, ENT_QUOTES, 'UTF-8');
 	if ($_POST['out'] == 'html') $result = preg_replace('/(&lt;.+?&gt;)/ui', '<span class="html">$1</span>', $result);
 
 	echo json_encode(array('response' => $result));
+
 ?>

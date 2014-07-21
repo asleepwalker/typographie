@@ -22,9 +22,8 @@ HEADER NAV UL LI A:before { color: #888; content: '▸'; padding-right: 5px; }
 #wrap #editor .controls #show_options.button SPAN.icon { background: url(i/icons.png) no-repeat -1px -1px; color: #333; display: inline-block; font: 13px/28px "Arial", sans-serif; height: 28px; }
 #wrap #editor .controls #show_options.button:hover SPAN.icon { background-position: -1px -31px !important; color: #000; }
 #wrap #editor .controls .mode { float: right; }
-#wrap #editor .controls #highlight { display: inline-block; height: 30px; line-height: 30px; margin-left: 4px; }
-#wrap #editor .controls #highlight #hcheckbox { top: 3px; }
-#wrap #editor .controls #highlight LABEL { color: #333; font: 14px "Arial", sans-serif; }
+#wrap #editor .controls #highlight { display: inline-block; height: 26px; margin-left: 4px; padding-top: 4px; }
+#wrap #editor .controls #highlight LABEL { color: #333; font: 14px/17px "Arial", sans-serif; }
 #wrap #editor .controls #highlight:hover #hcheckbox { border-color: #999 !important; }
 #wrap #editor .controls #highlight:hover LABEL { color: #222 !important; }
 #wrap #help { margin: 0 auto 30px; width: 900px; }

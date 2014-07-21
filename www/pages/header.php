@@ -4,6 +4,9 @@
 		<title><?php if (isset($title)) echo $title.' | '; ?>Typographie</title>
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="style.css">
+		<!--[if IE]>
+			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
 	</head>
 	<body>
 		<header>

@@ -1,7 +1,7 @@
 <?php
 
 	/*
-		Typographie, v1.0
+		Typographie, v1.1
 		https://github.com/asleepwalker/typographie
 
 		by Artyom "Sleepwalker" Fedosov, 2014

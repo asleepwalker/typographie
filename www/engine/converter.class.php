@@ -4,11 +4,13 @@
 
 		private $_in;
 		private $_out;
+		private $_actions;
 		private $_preserved;
 
-		public function __construct($in = 'plain', $out = 'plain') {
+		public function __construct($in = 'plain', $out = 'plain', $actions = '') {
 			$this->_in = $in;
 			$this->_out = $out;
+			$this->_actions = explode(',', $actions);
 			$this->_preserved = array();
 		}
 
@@ -29,10 +31,10 @@
 			elseif (($this->_in == 'plain') && ($this->_out == 'html')) {
 				$raw = str_replace('<', '&lt;', $raw);
 				$raw = str_replace('>', '&gt;', $raw);
-				/*if (in_array('paragraphs', $this->_actions)) {
+				if (in_array('paragraphs', $this->_actions)) {
 					$raw = preg_replace('/^(.+?)$/uim', "<p>$1</p>", $raw);
 					$raw = preg_replace('/<\/p>\n<p>/ui', "<br>\n", $raw);
-				} else $raw = preg_replace('/[\n]/ui', "<br>\n", $raw);*/
+				} else $raw = preg_replace('/[\n]/ui', "<br>\n", $raw);
 			}
 
 			if ($this->_out == 'html') {
@@ -40,7 +42,7 @@
 				if ($this->_in == 'html') {
 					if (in_array('safehtml', $this->_actions))
 						$raw = $this->preserve_html('/<(code|pre)[^>]*>.*?<\/\1>/uis', $this->_preserved, $raw);
-					$raw = preserve_html('/<[^>]+>/ui', $this->_preserved, $raw);
+					$raw = $this->preserve_html('/<[^>]+>/ui', $this->_preserved, $raw);
 				}
 			}
 

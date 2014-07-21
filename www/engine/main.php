@@ -1,7 +1,7 @@
 <?php
 
 	/*
-		Typographie, v1.0
+		Typographie, v1.1
 		https://github.com/asleepwalker/typographie
 
 		by Artyom "Sleepwalker" Fedosov, 2014
@@ -17,7 +17,7 @@
 	require_once('../typographie.class.php');
 	require_once('converter.class.php');
 	$engine = new Typographie($_POST['actions']);
-	$device = new Converter($_POST['in'], $_POST['out']);
+	$device = new Converter($_POST['in'], $_POST['out'], $_POST['actions']);
 	$raw = $device->prepare($_POST['raw']);
 	$result = $engine->process($raw);
 	$result = $device->ready($result);

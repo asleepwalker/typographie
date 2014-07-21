@@ -23,8 +23,8 @@
 			$this->_actions = explode(',', $actionlist);
 		}
 
-		protected function preserve_part($pattern, &$pieces, $text) {
-			return preg_replace_callback($pattern, function ($match) use (&$pieces) {
+		protected function preserve_part($pattern, &$pieces, &$text) {
+			$text = preg_replace_callback($pattern, function ($match) use (&$pieces) {
 				$code = substr(md5($match[0]), 0, 8);
 				$pieces[$code] = $match[0];
 				return '{'.$code.'}';
@@ -118,10 +118,6 @@
 			if (in_array('punctuation', $this->_actions)) {
 				if (in_array('dashes', $this->_actions)) $actions['/[-]{2,5}/'] = '—';
 				$actions['/([ ]+[-—][ ]*)|([ ]*[-—][ ]+)/u']   = ' - ';
-
-				// html-адрес
-				// e-mail
-
 				$actions['/(?<=[.,!?:)])(?=[^ \n"\'.,;!?&:\]\)<{)])/u'] = ' ';
 				$actions['/[ ]*(?=[.,;!?:])/u']                = '';
 				$actions['/(?<=[.,])[\s]{0,1}[-—](?=[ ])/']    = '—';
@@ -164,8 +160,14 @@
 				$actions['/[.]{2,5}/']                         = '…';
 
 			// Выполняем операции замены
-			foreach ($actions as $key=>$val)
+			$exceptions = array();
+			$this->preserve_part('/[\d]+(\.[\d]+)+/u', $exceptions, $text);
+			$this->preserve_part('/^[a-z0-9_.+-]+@[a-z0-9-]+\.[a-z0-9-.]+$/ui', $exceptions, $text);
+			$this->preserve_part('/((([a-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[a-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[a-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/u', $exceptions, $text);
+			foreach ($actions as $key => $val)
 				$text = preg_replace($key, $val, $text);
+			foreach ($exceptions as $code => $content)
+				$text = str_replace('{'.$code.'}', $content, $text);
 
 			// Вложенные кавычки
 			if (in_array('inquot', $this->_actions))

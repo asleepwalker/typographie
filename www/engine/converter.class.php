@@ -35,11 +35,11 @@
 			}
 
 			if ($this->_out == 'html') {
-				$raw = $this->preserve_part('/<[\/]{0,1}p>/ui', $this->_preserved, $raw);
+				$this->preserve_part('/<[\/]{0,1}p>/ui', $this->_preserved, $raw);
 				if ($this->_in == 'html') {
 					if (in_array('safehtml', $this->_actions))
-						$raw = $this->preserve_part('/<(code|pre)(\s[^>]*)*>.*?<\/\1>/uis', $this->_preserved, $raw);
-					$raw = $this->preserve_part('/<[^>]+>/ui', $this->_preserved, $raw);
+						$this->preserve_part('/<(code|pre)(\s[^>]*)*>.*?<\/\1>/uis', $this->_preserved, $raw);
+					$this->preserve_part('/<[^>]+>/ui', $this->_preserved, $raw);
 				}
 			}
 

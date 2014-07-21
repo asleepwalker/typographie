@@ -9,29 +9,17 @@
 		mail@asleepwalker.ru
 	*/
 
-	class Converter {
+	class TypographieModes extends Typographie {
 
 		private $_in;
 		private $_out;
-		private $_actions;
-		private $_preserved;
 
-		public function __construct($in, $out, $actions) {
+		public function mode($in, $out) {
 			$this->_in = $in;
 			$this->_out = $out;
-			$this->_actions = explode(',', $actions);
-			$this->_preserved = array();
 		}
 
-		private function preserve_html($pattern, &$pieces, $text) {
-			return preg_replace_callback($pattern, function ($match) use (&$pieces) {
-				$code = substr(md5($match[0]), 0, 8);
-				$pieces[$code] = $match[0];
-				return '{'.$code.'}';
-			}, $text);
-		}
-
-		public function prepare($raw) {
+		private function prepare($raw) {
 			if (($this->_in == 'html') && ($this->_out == 'plain')) {
 				$raw = preg_replace('/[\n]*<br[\s\/]*>[\n]*/ui', "\n", $raw);
 				$raw = preg_replace('/<p[^>]*>(.*?)<\/p>[\s]*/usi', "$1\n\n", $raw);
@@ -47,18 +35,18 @@
 			}
 
 			if ($this->_out == 'html') {
-				$raw = $this->preserve_html('/<[\/]{0,1}p>/ui', $this->_preserved, $raw);
+				$raw = $this->preserve_part('/<[\/]{0,1}p>/ui', $this->_preserved, $raw);
 				if ($this->_in == 'html') {
 					if (in_array('safehtml', $this->_actions))
-						$raw = $this->preserve_html('/<(code|pre)[^>]*>.*?<\/\1>/uis', $this->_preserved, $raw);
-					$raw = $this->preserve_html('/<[^>]+>/ui', $this->_preserved, $raw);
+						$raw = $this->preserve_part('/<(code|pre)(\s[^>]*)*>.*?<\/\1>/uis', $this->_preserved, $raw);
+					$raw = $this->preserve_part('/<[^>]+>/ui', $this->_preserved, $raw);
 				}
 			}
 
 			return $raw;
 		}
 
-		public function ready($text) {
+		private function ready($text) {
 			if (($this->_in == 'html') && ($this->_out == 'plain'))
 				$text = html_entity_decode($text, ENT_COMPAT, 'UTF-8');
 
@@ -66,6 +54,12 @@
 				$text = str_replace('{'.$code.'}', $content, $text);
 
 			return $text;
+		}
+
+		public function process($raw) {
+			$text = $this->prepare($raw);
+			$text = parent::process($text);
+			return $this->ready($text);
 		}
 	};
 

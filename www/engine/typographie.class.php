@@ -11,9 +11,25 @@
 
 	class Typographie {
 
-		private $_actions;
-		public function __construct($actionlist) { $this->actions($actionlist); }
-		public function actions($actionlist) { $this->_actions = explode(',', $actionlist); }
+		protected $_actions;
+		protected $_preserved;
+
+		public function __construct($actionlist) {
+			$this->actions($actionlist);
+			$this->_preserved = array();
+		}
+
+		public function actions($actionlist) {
+			$this->_actions = explode(',', $actionlist);
+		}
+
+		protected function preserve_part($pattern, &$pieces, $text) {
+			return preg_replace_callback($pattern, function ($match) use (&$pieces) {
+				$code = substr(md5($match[0]), 0, 8);
+				$pieces[$code] = $match[0];
+				return '{'.$code.'}';
+			}, $text);
+		}
 
 		public function process($text) {
 			$actions = array();
@@ -102,6 +118,10 @@
 			if (in_array('punctuation', $this->_actions)) {
 				if (in_array('dashes', $this->_actions)) $actions['/[-]{2,5}/'] = '—';
 				$actions['/([ ]+[-—][ ]*)|([ ]*[-—][ ]+)/u']   = ' - ';
+
+				// html-адрес
+				// e-mail
+
 				$actions['/(?<=[.,!?:)])(?=[^ \n"\'.,;!?&:\]\)<{)])/u'] = ' ';
 				$actions['/[ ]*(?=[.,;!?:])/u']                = '';
 				$actions['/(?<=[.,])[\s]{0,1}[-—](?=[ ])/']    = '—';

@@ -16,23 +16,16 @@
 
 	require_once('typographie.class.php');
 	require_once('converter.class.php');
-	$engine = new Typographie($_POST['actions']);
-	$converter = new Converter($_POST['in'], $_POST['out'], $_POST['actions']);
-	$raw = $converter->prepare($_POST['raw']);
-	$result = $engine->process($raw);
-	$result = $converter->ready($result);
+	$engine = new TypographieModes($_POST['actions']);
+	$engine->mode($_POST['in'], $_POST['out']);
+	$result = $engine->process($_POST['raw']);
 
 	if ($_POST['highlight'] == 'enabled') {
 		require_once('finediff.class.php');
-		$opcodes = FineDiff::getDiffOpcodes($_POST['raw'], $result);
-		$result = '';
+		$opcodes = FineDiff::getDiffOpcodes($_POST['raw'], $result); $result = '';
 		FineDiff::renderFromOpcodes($_POST['raw'], $opcodes, function($opcode, $from, $from_offset, $from_len) use (&$result) {
-			if ($opcode === 'c') {
-				$result .= htmlspecialchars(mb_substr($from, $from_offset, $from_len));
-			}
-			else if ($opcode === 'i') {
-	 			$result .= '<span class="fix">'.htmlspecialchars(mb_substr($from, $from_offset, $from_len), ENT_QUOTES).'</span>';
-			}
+			if ($opcode === 'c') $result .= htmlspecialchars(mb_substr($from, $from_offset, $from_len));
+			else if ($opcode === 'i') $result .= '<span class="fix">'.htmlspecialchars(mb_substr($from, $from_offset, $from_len), ENT_QUOTES).'</span>';
 		});
 	}
 	else $result = htmlspecialchars($result, ENT_QUOTES, 'UTF-8');

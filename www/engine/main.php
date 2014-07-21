@@ -14,7 +14,7 @@
 		exit;
 	}
 
-	require_once('../typographie.class.php');
+	require_once('typographie.class.php');
 	require_once('converter.class.php');
 	$engine = new Typographie($_POST['actions']);
 	$device = new Converter($_POST['in'], $_POST['out'], $_POST['actions']);

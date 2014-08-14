@@ -1,7 +1,7 @@
 <?php
 
 	/*
-		Typographie, v1.0
+		Typographie, v1.1
 		https://github.com/asleepwalker/typographie
 
 		by Artyom "Sleepwalker" Fedosov, 2014
@@ -11,55 +11,27 @@
 
 	class Typographie {
 
-		private $_in;
-		private $_out;
-		private $_actions;
+		protected $_actions;
+		protected $_preserved;
 
-		public function __construct($in = 'plain', $out = 'plain') {
-			$this->_in = $in;
-			$this->_out = $out;
+		public function __construct($actionlist) {
+			$this->actions($actionlist);
+			$this->_preserved = array();
 		}
 
 		public function actions($actionlist) {
 			$this->_actions = explode(',', $actionlist);
 		}
 
-		public function convert($raw) {
-			if (($this->_in == 'html') && ($this->_out == 'plain')) {
-				$raw = preg_replace('/[\n]*<br[\s\/]*>[\n]*/ui', "\n", $raw);
-				$raw = preg_replace('/<p[^>]*>(.*?)<\/p>[\s]*/usi', "$1\n\n", $raw);
-				$raw = strip_tags($raw);
-			}
-			elseif (($this->_in == 'plain') && ($this->_out == 'html')) {
-				$raw = str_replace('<', '&lt;', $raw);
-				$raw = str_replace('>', '&gt;', $raw);
-				if (in_array('paragraphs', $this->_actions)) {
-					$raw = preg_replace('/^(.+?)$/uim', "<p>$1</p>", $raw);
-					$raw = preg_replace('/<\/p>\n<p>/ui', "<br>\n", $raw);
-				} else $raw = preg_replace('/[\n]/ui', "<br>\n", $raw);
-			}
-			return $raw;
+		protected function preserve_part($pattern, &$pieces, &$text) {
+			$text = preg_replace_callback($pattern, function ($match) use (&$pieces) {
+				$code = substr(md5($match[0]), 0, 8);
+				$pieces[$code] = $match[0];
+				return '{'.$code.'}';
+			}, $text);
 		}
 
 		public function process($text) {
-
-			$pieces = array();
-			function preserve_html($pattern, &$pieces, $text) {
-				return preg_replace_callback($pattern, function ($match) use (&$pieces) {
-					$code = substr(md5($match[0]), 0, 8);
-					$pieces[$code] = $match[0];
-					return '{'.$code.'}';
-				}, $text);
-			}
-			if ($this->_out == 'html') {
-				$text = preserve_html('/<[\/]{0,1}p>/ui', $pieces, $text);
-				if ($this->_in == 'html') {
-					if (in_array('safehtml', $this->_actions))
-						$text = preserve_html('/<(code|pre)[^>]*>.*?<\/\1>/uis', $pieces, $text);
-					$text = preserve_html('/<[^>]+>/ui', $pieces, $text);
-				}
-			}
-
 			$actions = array();
 
 			// Спецсимволы
@@ -145,7 +117,8 @@
 			// Отступы в пунктуации
 			if (in_array('punctuation', $this->_actions)) {
 				if (in_array('dashes', $this->_actions)) $actions['/[-]{2,5}/'] = '—';
-				$actions['/([ ]+[-—][ ]*)|([ ]*[-—][ ]+)/u']   = ' - ';
+				$actions['/([ ]+([-—])[ ]*)|([ ]*([-—])[ ]+)/u']   = ' $2$4 ';
+				$actions['/^[ ]([-—][ ])/um']                  = '$1';
 				$actions['/(?<=[.,!?:)])(?=[^ \n"\'.,;!?&:\]\)<{)])/u'] = ' ';
 				$actions['/[ ]*(?=[.,;!?:])/u']                = '';
 				$actions['/(?<=[.,])[\s]{0,1}[-—](?=[ ])/']    = '—';
@@ -188,8 +161,15 @@
 				$actions['/[.]{2,5}/']                         = '…';
 
 			// Выполняем операции замены
-			foreach ($actions as $key=>$val)
+			$exceptions = array();
+			$this->preserve_part('/[\d]+([.,][\d]+)+/u', $exceptions, $text); // Дроби, IP
+			$this->preserve_part('/^[a-z0-9_.+-]+@[a-z0-9-]+\.[a-z0-9-.]+$/ui', $exceptions, $text); // E-mail
+			$this->preserve_part('/((([a-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[a-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[a-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/u', $exceptions, $text); // URI
+			$this->preserve_part('/[:;.][\'_-]{0,2}[.,edpobnsu*#@|()&\$308ехорвъэ]/ui', $exceptions, $text); // Смайлы
+			foreach ($actions as $key => $val)
 				$text = preg_replace($key, $val, $text);
+			foreach ($exceptions as $code => $content)
+				$text = str_replace('{'.$code.'}', $content, $text);
 
 			// Вложенные кавычки
 			if (in_array('inquot', $this->_actions))
@@ -209,12 +189,6 @@
 				if (strpos($text, '«') === false)
 					$text = preg_replace('/([\d.]+)»/', '$1″', $text);
 			}
-
-			if (($this->_in == 'html') && ($this->_out == 'plain'))
-				$text = html_entity_decode($text, ENT_COMPAT, 'UTF-8');
-
-			foreach ($pieces as $code => $content)
-				$text = str_replace('{'.$code.'}', $content, $text);
 
 			return $text;
 		}

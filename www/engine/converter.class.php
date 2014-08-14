@@ -62,5 +62,3 @@
 			return $this->ready($text);
 		}
 	};
-
-?>

@@ -35,5 +35,3 @@
 	function returnError($code) {
 		die(json_encode(array('error' => $GLOBALS['rules']['errors'][$code])));
 	}
-
-?>

@@ -12,5 +12,3 @@
 	elseif (isset($_GET['contacts'])) $page = 'contacts';
 
 	include('pages/'.$page.'.php');
-
-?>

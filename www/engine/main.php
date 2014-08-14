@@ -32,5 +32,3 @@
 	if ($_POST['out'] == 'html') $result = preg_replace('/(&lt;.+?&gt;)/ui', '<span class="html">$1</span>', $result);
 
 	echo json_encode(array('response' => $result));
-
-?>

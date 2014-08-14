@@ -13,13 +13,17 @@
 
 
 	$in = 'plain'; if (isset($_POST['in'])) $in = $_POST['in'];
-	$out = 'plain'; if (isset($_POST['out'])) $in = $_POST['out'];
+	$out = 'plain'; if (isset($_POST['out'])) $out = $_POST['out'];
 	$actions = implode(',',$rules['actions']); if (isset($_POST['actions'])) $actions = $_POST['actions'];
 
-	$engine = new typographie($in, $out);
-	$engine->actions($actions);
-	$raw = $engine->convert($_POST['raw']);
-	$result = $engine->process($raw);
+	if (($in == 'plain') && ($out == 'plain')) {
+		$engine = new Typographie($actions);
+	} else {
+		require_once('../engine/converter.class.php');
+		$engine = new TypographieModes($actions);
+		$engine->mode($in, $out);
+	}
+	$result = $engine->process($_POST['raw']);
 	returnResult($result);
 
 	function returnResult($text) {

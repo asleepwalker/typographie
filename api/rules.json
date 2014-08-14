@@ -1,5 +1,5 @@
 {
-	"version": "1.0",
+	"version": "1.1",
 	"actions": ["inquot","dashes","dblspace","angles","specials","mathchars","punctuation","specialspaces","nbsp","hellip","paragraphs","safehtml"],
 	"errors": {
 		"1": "BAD_REQUEST",

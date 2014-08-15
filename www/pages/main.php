@@ -51,5 +51,8 @@
 	<div id="bz_bottom" class="blackzone bz" style="bottom: 0; display: none; left: 0; right: 0;"></div>
 </div>
 
-<script type="text/javascript" src="js/editor.js"></script>
+<script type="text/javascript" src="js/underscore.min.js"></script>
+<script type="text/javascript" src="js/backbone.min.js"></script>
+<script type="text/javascript" src="js/backbone.native.min.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
 <?php include('footer.php') ?>

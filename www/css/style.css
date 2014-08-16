@@ -45,7 +45,7 @@ HEADER NAV UL LI A:before { color: #888; content: '▸'; padding-right: 5px; }
 #content ARTICLE H2 { color: #555; font: 20px "Arial", sans-serif; margin: 25px 0 12px; }
 #content ARTICLE A { color: #15C; text-decoration: none; }
 #content ARTICLE A:hover { text-decoration: underline; }
-#content ARTICLE UL { list-style-position: inside; margin-bottom: 16px; }
+#content ARTICLE UL { list-style-position: inside; margin-bottom: 30px; padding-left: 15px; }
 #content ARTICLE UL LI { margin-bottom: 5px; }
 #content ARTICLE CODE { background: #EEE; display: block; margin-bottom: 15px; padding: 10px; }
 #content ARTICLE TABLE.specials { width: 100%; }

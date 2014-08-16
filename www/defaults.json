@@ -1,0 +1,55 @@
+[
+	{
+		"caption": "«Живое» типографирование",
+		"name": "live", "group": "editor",
+		"send": false, "active": true
+	},{
+		"caption": "Вложенные кавычки: «„“»",
+		"name": "inquot", "group": "action",
+		"send": true, "active": true
+	},{
+		"caption": "Тире, минус, интервал вместо дефиса",
+		"name": "dashes", "group": "action",
+		"send": true, "active": true
+	},{
+		"caption": "Градусы, минуты/футы, секунды/дюймы",
+		"name": "angles", "group": "action",
+		"send": true, "active": true
+	},{
+		"caption": "Исправлять двойные+ пробелы",
+		"name": "dblspace", "group": "action",
+		"send": true, "active": true
+	},{
+		"caption": "Условные знаки: <b>(с)</b> <small>&gt;</small> <b>©</b>, <b>(тм)</b> <small>&gt;</small> <b>™</b>, <b>{*}</b> <small>&gt;</small> <b>°</b>...",
+		"name": "specials", "group": "action",
+		"send": true, "active": true
+	},{
+		"caption": "Математические знаки: <b>+-</b> <small>&gt;</small> <b>&plusmn;</b>, <b>{^2}</b> <small>&gt;</small> <b>&sup2;</b>, <b>{!=}</b> <small>&gt;</small> <b>≠</b> ...<",
+		"name": "mathchars", "group": "action",
+		"send": true, "active": true
+	},{
+		"caption": "Исправлять отступы в пунктуации",
+		"name": "punctuation", "group": "action",
+		"send": true, "active": true
+	},{
+		"caption": "Исправлять отступы вокруг спецсимволов",
+		"name": "specialspaces", "group": "action",
+		"send": true, "active": true
+	},{
+		"caption": "Не «отрывать» короткие слова",
+		"name": "nbsp", "group": "action",
+		"send": true, "active": true
+	},{
+		"caption": "Исправлять многоточие на спецсимвол",
+		"name": "hellip", "group": "action",
+		"send": true, "active": true
+	},{
+		"caption": "Разбивать на абзацы (<tt>&lt;p&gt;</tt>) пустой строкой",
+		"name": "paragraphs", "group": "html",
+		"send": true, "active": true
+	},{
+		"caption": "Не обрабатывать блоки <tt>&lt;code&gt;</tt> и <tt>&lt;pre&gt;</tt>",
+		"name": "safehtml", "group": "html",
+		"send": true, "active": true
+	}
+]

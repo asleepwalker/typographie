@@ -8,7 +8,7 @@ Also available as an [extension for Google Chrome][].
 Highlighting of correction powered by [PHP-FineDiff][] by [Raymond Hill][].<br>
 JavaScript framework — [Backbone.js][].
 
- [extension for Google Chrome]: https://github.com/davidshimjs
+ [extension for Google Chrome]: https://chrome.google.com/webstore/detail/typographie/afgfkjihapfjmakkehjopdkoljnebape
  [PHP-FineDiff]: https://github.com/gorhill/PHP-FineDiff
  [Raymond Hill]: https://github.com/gorhill
  [Backbone.js]: https://github.com/jashkenas/backbone

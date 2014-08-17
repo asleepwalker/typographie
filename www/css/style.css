@@ -68,7 +68,7 @@ FOOTER NAV UL LI#author A:hover SPAN.icon { color: #000; }
 #dialog_box { border: 8px solid rgba(0,0,0,0.6); border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; left: 50%; margin-left: -220px; margin-top: -210px; position: absolute; top: 50%; width: 440px; z-index: 10001; }
 #dialog_body { background: white; border: 1px solid #AAA; border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; padding: 15px 20px; } 
 #options { list-style: none; }
-#options HR { background-color: #CCC; border: 0px none; clear: both; color: #CCC; height: 1px; margin: 8px 0; }
+#options LI.first_in_group { border-top: 1px solid #ccc; margin-top: 8px; padding-top: 10px; }
 #options LI { padding: 2px 0; }
 #options DIV { display: inline-block; }
 #options DIV:hover .checkbox { border-color: #999 !important; }

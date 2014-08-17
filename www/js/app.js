@@ -151,6 +151,10 @@ window.onload = function() {
 		render: function() {
 			this.$el.html(this.itemTemplate(this.model.toJSON()));
 			return this;
+		},
+		destroy: function() {
+			this.model.off('change:active');
+			this.el.remove();
 		}
 	});
 
@@ -160,55 +164,33 @@ window.onload = function() {
 			$('#show_options').on('click', _.bind(this.showDialog, this));
 			$('.hide_options').on('click', _.bind(this.hideDialog, this));
 		},
-    		optionViewList: [],
+		optionViewList: [],
 		showDialog: function() {
 			this.render();
-			var wrapper = $('#dialog_wrapper')[0];
-			if (!wrapper.hasAttribute('shown')) {
-				wrapper.style.display = 'block';
-				wrapper.style.opacity = 0;
-				var last = +new Date();
-				var tick = function() {
-					wrapper.style.opacity = +wrapper.style.opacity + (new Date() - last) / 400;
-					last = +new Date();
-					if (+wrapper.style.opacity < 1) {
-						(window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 10)
-					} else wrapper.setAttribute('shown', '');
-				};
-				tick();
-			}
+			$('#dialog_wrapper').fadeInIfNotShown();
 		},
 		hideDialog: function(e) {
-			this.optionViewList.forEach(function(view) {
-				view.remove();
-			})
-			var wrapper = $('#dialog_wrapper')[0];
-			if ((e.target.className.indexOf('hide_options') != -1) && wrapper.hasAttribute('shown')) {
-				var last = +new Date();
-				var tick = function() {
-					wrapper.style.opacity = +wrapper.style.opacity - (new Date() - last) / 400;
-					last = +new Date();
-
-					if (+wrapper.style.opacity > 0) {
-						(window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16)
-					} else {
-						wrapper.style.display = 'none';
-						wrapper.removeAttribute('shown');
-					}
-				};
-				tick();
-			}
+			var dialogView = this;
+			$('#dialog_wrapper').fadeOutIfShown(e, function() {
+				dialogView.optionViewList.forEach(function(view) {
+					view.destroy();
+				});
+			});
 		},
 		render: function() {
-			var prev;
-      			this.$el.html('');
+			var prevOptionGroup;
+
 			_.each(this.model.get('options').models, function(option) {
-				if (prev && (prev != option.get('group'))) this.el.appendChild($('<hr>')[0]);
-				prev = option.get('group');
-				var optionView = new OptionView({model: option});
+				var optionView = new OptionView({model: option}),
+				    optionElement = optionView.render().el;
 				this.optionViewList.push(optionView);
-				this.el.appendChild(optionView.render().el);
-      			}, this);
+
+				if (prevOptionGroup && (prevOptionGroup != option.get('group')))
+					optionElement.className = 'first_in_group';
+				prevOptionGroup = option.get('group');
+
+				this.el.appendChild(optionElement);
+			}, this);
 		}
 	});
 
@@ -232,7 +214,7 @@ window.onload = function() {
 	var inputSwitcherView = new InputSwitcherView({model: typographieModel});
 	var outputSwitcherView = new OutputSwitcherView({model: typographieModel});
 	var highlightCheckboxView = new HighlightCheckboxView({model: typographieModel});
-	var optionsDialogView = new OptionsDialogView({model: typographieModel, options: optionsCollection});
+	var optionsDialogView = new OptionsDialogView({model: typographieModel});
 	var loadingView = new LoadingView({model: typographieModel});
 
 	function adaptationResize() {
@@ -252,4 +234,48 @@ window.onload = function() {
 	window.onresize = adaptationResize;
 	adaptationResize();
 
+};
+
+//-------------------------------------------------------------------
+// DIRTY WORK
+
+$.prototype.fadeInIfNotShown = function(callback) {
+	var el = this[0];
+	if (!el.hasAttribute('shown')) {
+		el.style.display = 'block';
+		el.style.opacity = 0;
+		var last = +new Date();
+		var tick = function() {
+			el.style.opacity = +el.style.opacity + (new Date() - last) / 400;
+			last = +new Date();
+			if (+el.style.opacity < 1) {
+				(window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 10)
+			} else {
+				el.setAttribute('shown', '');
+				if (typeof callback == 'function') callback();
+			}
+		};
+		tick();
+	}
+};
+
+$.prototype.fadeOutIfShown = function(e, callback) {
+	var el = this[0];
+	if ((e.target.className.indexOf('hide_options') != -1) && el.hasAttribute('shown')) {
+		var last = +new Date();
+
+		var tick = function() {
+			el.style.opacity = +el.style.opacity - (new Date() - last) / 400;
+			last = +new Date();
+
+			if (+el.style.opacity > 0) {
+				(window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16)
+			} else {
+				el.style.display = 'none';
+				el.removeAttribute('shown');
+				if (typeof callback == 'function') callback();
+			}
+		};
+		tick();
+	}
 };

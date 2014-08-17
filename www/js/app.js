@@ -160,6 +160,7 @@ window.onload = function() {
 			$('#show_options').on('click', _.bind(this.showDialog, this));
 			$('.hide_options').on('click', _.bind(this.hideDialog, this));
 		},
+    		optionViewList: [],
 		showDialog: function() {
 			this.render();
 			var wrapper = $('#dialog_wrapper')[0];
@@ -178,6 +179,9 @@ window.onload = function() {
 			}
 		},
 		hideDialog: function(e) {
+			this.optionViewList.forEach(function(view) {
+				view.remove();
+			})
 			var wrapper = $('#dialog_wrapper')[0];
 			if ((e.target.className.indexOf('hide_options') != -1) && wrapper.hasAttribute('shown')) {
 				var last = +new Date();
@@ -197,14 +201,14 @@ window.onload = function() {
 		},
 		render: function() {
 			var prev;
-			this.$el.html(''); // Todo: Clear via views destroying
+      			this.$el.html('');
 			_.each(this.model.get('options').models, function(option) {
 				if (prev && (prev != option.get('group'))) this.el.appendChild($('<hr>')[0]);
 				prev = option.get('group');
-
 				var optionView = new OptionView({model: option});
+				this.optionViewList.push(optionView);
 				this.el.appendChild(optionView.render().el);
-			}, this);
+      			}, this);
 		}
 	});
 

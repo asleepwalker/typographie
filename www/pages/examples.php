@@ -25,6 +25,27 @@ url = "http://api.typographie.ru/"<br>
 params = urllib.urlencode({"raw":"Your text."})<br>
 f = urllib.urlopen(url, params)<br>
 print f.read()</code>
+			<h2>Parser3</h2>
+			<code>@typographie[sRaw][jResponse;oResponse;result]<br>
+&nbsp;&nbsp;^curl:session{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;^curl:options[<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$.url[http://api.typographie.ru/]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$.charset[UTF-8]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$.timeout(10)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$.ssl_verifypeer(0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;]<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$jResponse[^curl:load[<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$.url[http://api.typographie.ru/]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$.postfields[raw=$sRaw]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;]]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$oResponse[^json:parse[^untaint{$jResponse.text};<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$.double(false)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;]]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$result[$oResponse.result]<br>
+&nbsp;&nbsp;}<br>
+<br>
+^typographie[Your text.]</code>
 			<h2>Linux bash через cURL</h2>
 			<code>curl -d "raw=Your%20text." http://api.typographie.ru/</code>
 		</article>

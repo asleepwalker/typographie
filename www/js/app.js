@@ -43,7 +43,10 @@ window.onload = function() {
 				type: 'POST',
 				url: 'engine/main.php',
 				dataType: 'json',
-				success: callback,
+				success: function(data) {
+					core.state('free');
+					callback(data);
+				},
 				error: this.error,
 				timeout: 5000
 			});
@@ -76,7 +79,6 @@ window.onload = function() {
 		},
 		process: function() {
 			this.model.process($('#raw_input')[0].value, this.render);
-			this.model.state('free');
 		},
 		render: function(data) {
 			$('#display').html(data.response);
@@ -217,27 +219,27 @@ window.onload = function() {
 	var optionsDialogView = new OptionsDialogView({model: typographieModel});
 	var loadingView = new LoadingView({model: typographieModel});
 
-	function adaptationResize() {
-		var w = window,
-		    d = document,
-		    e = d.documentElement,
-		    g = d.getElementsByTagName('body')[0],
-		    y = w.innerHeight|| e.clientHeight || g.clientHeight;
-		h = y/2;
-		if (h > (y-300)) h = y-300;
-		if (h < 200) h = 200;
-		document.getElementById('input').style.height = h+'px';
-		document.getElementById('output').style.height = h+'px';
-		document.getElementById('raw_input').style.height = (h-40)+'px';
-		document.getElementById('display').style.height = (h-40)+'px';
-	}
-	window.onresize = adaptationResize;
-	adaptationResize();
-
 };
 
 //-------------------------------------------------------------------
 // DIRTY WORK
+
+function adaptationResize() {
+	var w = window,
+	    d = document,
+	    e = d.documentElement,
+	    g = d.getElementsByTagName('body')[0],
+	    y = w.innerHeight|| e.clientHeight || g.clientHeight;
+	h = y/2;
+	if (h > (y-300)) h = y-300;
+	if (h < 200) h = 200;
+	document.getElementById('input').style.height = h+'px';
+	document.getElementById('output').style.height = h+'px';
+	document.getElementById('raw_input').style.height = (h-40)+'px';
+	document.getElementById('display').style.height = (h-40)+'px';
+}
+window.onresize = adaptationResize;
+adaptationResize();
 
 $.prototype.fadeInIfNotShown = function(callback) {
 	var el = this[0];

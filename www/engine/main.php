@@ -19,6 +19,10 @@
 	$engine = new TypographieModes($_POST['actions']);
 	$engine->mode($_POST['in'], $_POST['out']);
 	$result = $engine->process($_POST['raw']);
+	if ($_POST['out'] == 'html') {
+		$result = htmlentities($result);
+		$result = preg_replace('/&lt;(.+?)&gt;/ui', '<$1>', $result);
+	}
 
 	if ($_POST['highlight'] == 'enabled') {
 		require_once('finediff.class.php');

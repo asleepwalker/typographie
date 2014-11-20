@@ -120,6 +120,7 @@
 				$actions['/^[ ]([-—][ ])/um']                                   = '$1';
 				$actions['/(?<=[.,!?:)])(?=[^ \n"\'.,;!?&:\]\)<»{)])/u']        = ' ';
 				$actions['/[ ]*(?=[.,;!?:])/u']                                 = '';
+				if (in_array('nbsp', $this->_actions)) $actions['/ ([-—])/']    = ' $1';
 			}
 
 			// Градусы, минуты/футы, секунды/дюймы, ч.1
@@ -146,13 +147,15 @@
 			// Тире, минус, интервал
 			if (in_array('dashes', $this->_actions)) {
 				$actions['/(^|\n|["„«])--?(\s)/u']             = '$1—$2';
-				$actions['/(\s)--?(\s)/']                      = ' —$2';
 				$actions['/(?<=[\d])-(?=[\d])/']               = '–';
+				if (in_array('nbsp', $this->_actions))
+				     $actions['/( |\s)--?(\s)/']               = ' —$2';
+				else $actions['/(\s)--?(\s)/']                 = ' —$2';
 			}
 
 			// Неразрывные пробелы
 			if (in_array('nbsp', $this->_actions))
-				$actions['/([\s][a-zа-яё]{1,2})[ ]/iu']        = '$1 ';
+				$actions['/([\s][a-zа-яёіїєґ\'′]{1,2})[ ]/iu'] = '$1 ';
 
 			// Символ троеточия
 			if (in_array('hellip', $this->_actions))

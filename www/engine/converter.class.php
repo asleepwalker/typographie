@@ -49,6 +49,8 @@
 		private function ready($text) {
 			if (($this->_in == 'html') && ($this->_out == 'plain'))
 				$text = html_entity_decode($text, ENT_COMPAT, 'UTF-8');
+			else if (in_array('entities', $this->_actions) && ($_POST['out'] == 'html'))
+				$text = htmlentities($text);
 
 			foreach ($this->_preserved as $code => $content)
 				$text = str_replace('{'.$code.'}', $content, $text);

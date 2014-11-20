@@ -51,5 +51,9 @@
 		"caption": "Не обрабатывать блоки <tt>&lt;code&gt;</tt> и <tt>&lt;pre&gt;</tt>",
 		"name": "safehtml", "group": "html",
 		"send": true, "active": true
+	},{
+		"caption": "Заменять спецсимволы HTML-сущностями",
+		"name": "entities", "group": "html",
+		"send": true, "active": true
 	}
 ]

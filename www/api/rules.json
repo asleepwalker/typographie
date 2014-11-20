@@ -1,6 +1,6 @@
 {
 	"version": "1.1",
-	"actions": ["inquot","dashes","dblspace","angles","specials","mathchars","punctuation","specialspaces","nbsp","hellip","paragraphs","safehtml"],
+	"actions": ["inquot","dashes","dblspace","angles","specials","mathchars","punctuation","specialspaces","nbsp","hellip","paragraphs","safehtml","entities"],
 	"errors": {
 		"1": "BAD_REQUEST",
 		"2": "ACTIONLIST_EMPTY",

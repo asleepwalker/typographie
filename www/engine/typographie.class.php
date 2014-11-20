@@ -152,7 +152,7 @@
 
 			// Неразрывные пробелы
 			if (in_array('nbsp', $this->_actions))
-				$actions['/([\s][a-zа-яё]{1,2})[ ]/iu']        = '$1 ';
+				$actions['/([\s][a-zа-яё]{1,2})[ ]/iu']        = '$1 ';
 
 			// Символ троеточия
 			if (in_array('hellip', $this->_actions))

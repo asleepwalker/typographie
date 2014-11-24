@@ -113,6 +113,11 @@
 				$actions['/\{ang}/']                           = '∠';
 			}
 
+			// Минус перед числами
+			if (in_array('dashes', $this->_actions)) {
+				$actions['/(?<=[ ])-(?=[\d])/']               = '–';
+			}
+
 			// Отступы в пунктуации
 			if (in_array('punctuation', $this->_actions)) {
 				if (in_array('dashes', $this->_actions)) $actions['/[-]{2,5}/'] = '—';

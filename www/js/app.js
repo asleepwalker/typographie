@@ -1,10 +1,7 @@
 /*
-	Typographie, v1.1
-	https://github.com/asleepwalker/typographie
-
-	by Artyom "Sleepwalker" Fedosov, 2014
-	http://me.asleepwalker.ru/
-	mail@asleepwalker.ru
+*	Typographie, v1.1
+*	(c) 2014 Artyom "Sleepwalker" Fedosov <mail@asleepwalker.ru>
+*	https://github.com/asleepwalker/typographie
 */
 
 window.onload = function() {

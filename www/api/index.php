@@ -1,5 +1,11 @@
 <?php
 
+	/*
+	*	Typographie, v1.1
+	*	(c) 2014 Artyom "Sleepwalker" Fedosov <mail@asleepwalker.ru>
+	*	https://github.com/asleepwalker/typographie
+	*/
+
 	$rules = json_decode(file_get_contents('rules.json'), true);
 	require_once('../engine/typographie.class.php');
 

@@ -1,11 +1,13 @@
-#Typographie
+#Typographie &nbsp;[![Build Status](https://travis-ci.org/asleepwalker/typographie.svg?branch=master)](https://travis-ci.org/asleepwalker/typographie)
 
-Easy-to-use web service for basic typographical preparation of russian texts before web publication.<br>
+Easy-to-use service for basic typographical preparation of russian texts before web publication.<br>
 Also available as an [extension for Google Chrome](https://chrome.google.com/webstore/detail/typographie/afgfkjihapfjmakkehjopdkoljnebape).
 
-<img src="https://cloud.githubusercontent.com/assets/5080313/3941661/a14f1f14-253a-11e4-82a3-988cdd0b297e.png" alt="typographie" />
+## Web service
 
-[![Build Status](https://travis-ci.org/asleepwalker/typographie.svg?branch=master)](https://travis-ci.org/asleepwalker/typographie)
+Available as online service at [typographie.ru](http://typographie.ru/)
+
+<img src="https://cloud.githubusercontent.com/assets/5080313/3941661/a14f1f14-253a-11e4-82a3-988cdd0b297e.png" alt="typographie" />
 
 ## Library
 
@@ -29,11 +31,11 @@ Include `lib/typographie.class.php` or install using Composer `asleepwalker/typo
 
 ## API
 
-Typographie also has API.
+Web service also has API.
 
 For processing text, you need to create HTTP request and send params using POST method to URL http://api.typographie.ru/.
 
-### Parameters
+#### Parameters
 
 `raw` (required) : The text to be processed.<br>
 `actions` : List of actions, separated by a comma (default — all).<br>
@@ -42,7 +44,7 @@ For processing text, you need to create HTTP request and send params using POST 
 
 Encoding — UTF-8.
 
-### Available actions
+#### Available actions
 
 `inquot` : Nested quotes: «„“» (otherwise — duplicate quotes stashing).<br>
 `dashes` : If necessary replace hyphens with dashes and minus signs.<br>
@@ -59,15 +61,15 @@ Encoding — UTF-8.
 
 List should be comma separated, somethink like `action1,action2,action3`.
 
-### Response example
+#### Response example
 
 The response comes in the JSON format.
 
 ```
-{"version":"1.0","result":"Your text."}
+{"version":"1.2.0","result":"Your text."}
 ```
 
-### Error codes
+#### Error codes
 
 `BAD_REQUEST` : Not received a required parameter — the text for processing (raw).<br>
 `ACTIONLIST_EMPTY` : Not specified actions. To perform all available actions just skip the action parameter.<br>

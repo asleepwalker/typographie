@@ -12,6 +12,9 @@
             "homepage": "http://me.asleepwalker.ru/en/"
         }
     ],
+    "require-dev": {
+        "phpunit/phpunit": "4.5.*"
+    },
     "scripts": {
         "test": "phpunit"
     }

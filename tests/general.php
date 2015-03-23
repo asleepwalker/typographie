@@ -42,7 +42,16 @@
 			$this->assertEquals('Проверка футов 4′', $engine->process('Проверка футов 4\''));
 			$this->assertEquals('Проверка дюймов 5″', $engine->process('Проверка дюймов 5"'));
 			$this->assertEquals('6″ в начале строки', $engine->process('6" в начале строки'));
-			$this->assertEquals('А* не Б\' работает с В" буквами', $engine->process('А* не Б\' работает с В" буквами'));
+			$this->assertEquals('"Диагональ 6″ здесь"', $engine->process('"Диагональ 6" здесь"'));
+			$this->assertEquals('"Диагональ 6″"', $engine->process('"Диагональ 6""'));
+			$this->assertEquals('"6″ диагональ"', $engine->process('"6" диагональ"'));
+			$this->assertEquals('"Диагональ модели 3020"', $engine->process('"Диагональ модели 3020"'));
+
+			$engine->actions('angles,quotes');
+			$this->assertEquals('«Диагональ 7″ здесь»', $engine->process('"Диагональ 7" здесь"'));
+			$this->assertEquals('«Диагональ 7″»', $engine->process('"Диагональ 7""'));
+			$this->assertEquals('«7″ диагональ»', $engine->process('"7" диагональ"'));
+			$this->assertEquals('«Диагональ модели 3021»', $engine->process('"Диагональ модели 3021"'));
 		}
 
 		public function testSpecials() {

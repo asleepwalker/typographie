@@ -240,14 +240,14 @@
 
 		protected function processDashes(&$text) {
 			$actions = array(
-				'/(^|\n|["„«])--?(\s)/u' => '$1—$2',
-				'/(?<=[\d])-(?=[\d])/'   => '–'
+				'/(^|\n|["„«])--?($|\s)/u' => '$1—$2',
+				'/(?<=[\d])-(?=[\d])/'     => '–'
 			);
 
 			if (in_array('nbsp', $this->_actions)) {
-				$actions['/( |\s)--?(\s)/']       = chr(194).chr(160).'—$2';
+				$actions['/(\s)--?(\s)/']  = chr(194).chr(160).'—$2';
 			} else {
-				$actions['/(\s)--?(\s)/']         = ' —$2';
+				$actions['/(\s)--?(\s)/']  = ' —$2';
 			}
 
 			$this->performActions($text, $actions);
@@ -255,16 +255,13 @@
 
 		protected function processAngles(&$text) {
 			$actions = array(
-				'/([\d.]+)\*/'           => '$1°',
-				'/([\d.]+)\'/'            => '$1′',
-				'/(?<=»)([^«]+?[\d.]+)»/' => '$1″'
+				'/(?<=\d)\*/'            => '°',
+				'/(?<=\d)\'/'            => '′',
+				'/(^[^"]*\d)"([^"]*$)/'  => '$1″$2', // Вне кавычек
+				'/("[^"]*\d)"([^"]*?")/' => '$1″$2'  // Внутри кавычек
 			);
 
 			$this->performActions($text, $actions);
-
-			if (strpos($text, '«') === false) {
-				$text = preg_replace('/([\d.]+)»/', '$1″', $text);
-			}
 		}
 
 		protected function processNbsps(&$text) {

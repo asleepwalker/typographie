@@ -104,6 +104,8 @@
 				$actions['/\{infinity}/']                      = '∞';
 				$actions['/\{belong}/']                        = '∈';
 				$actions['/\{!belong}/']                       = '∉';
+				$actions['/\{union}/']                         = '∪';
+				$actions['/\{intersection}/']                  = '∩';
 				$actions['/\{v}/']                             = '√';
 				$actions['/\{v3}/']                            = '∛';
 				$actions['/\{v4}/']                            = '∜';

@@ -52,7 +52,7 @@
 		public function testMath() {
 			$engine = new Typographie('mathchars');
 			$this->assertEquals('A ≠ B, B ≈ C, C ≡ D, D ∈ ∅', $engine->process('A {!=} B, B {~} C, C {equal} D, D {belong} {empty}'));
-			$this->assertEquals('∃ m ∈ R, ∀ n ∈ N, ∞ ∉ N', $engine->process('{exist} m {belong} R, {any} n {belong} N, {infinity} {!belong} N'));
+			$this->assertEquals('∃ m ∈ R, ∀ n ∈ N, ∞ ∉ N, A ∪ B, C ∩ D', $engine->process('{exist} m {belong} R, {any} n {belong} N, {infinity} {!belong} N, A {union} B, C {intersection} D'));
 			$this->assertEquals('y\' = ∂x/∂y, ±100, –50, 1 < 2 ⩽ 2 ⩾ 2 > 3', $engine->process('y\' = {part}x/{part}y, +-100, -50, 1 < 2 {<=} 2 {=>} 2 > 3'));
 			$this->assertEquals('1¹ = 1² = 1³ = √1 = ∛1 = ∜1', $engine->process('1{^1} = 1{^2} = 1{^3} = {v}1 = {v3}1 = {v4}1'));
 			$this->assertEquals('↔ ⇔ ← ⇐ → ⇒', $engine->process('<-> <=> <- <= -> =>'));

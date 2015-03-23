@@ -113,6 +113,8 @@
 				<tr>
 					<td>{5/8} → ⅝</td>
 					<td>{7/8} → ⅞</td>
+					<td>{union} → ∪</td>
+					<td>{intersection} → ∩</td>
 				<tr>
 			</table>
 		</article>

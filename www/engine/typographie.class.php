@@ -184,8 +184,8 @@
 				}
 			else {
 				// Дублирующие кавычки сливаются в одни
-				$text = preg_replace('/[«]+/', '«', $text);
-				$text = preg_replace('/[»]+/', '»', $text);
+				$text = preg_replace('/«{2,}/', '«', $text);
+				$text = preg_replace('/»{2,}/', '»', $text);
 			}
 
 			// Градусы, минуты/футы, секунды/дюймы, ч.2

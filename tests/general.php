@@ -64,8 +64,7 @@
 
 		public function testLineBreaks() {
 			$engine = new Typographie('nbsp');
-			$nbsp = chr(160);
-			$this->assertEquals('Всё своё я'.$nbsp.'ношу с'.$nbsp.'собой.', $engine->process('Всё своё я ношу с собой.'));
+			$this->assertEquals('Всё своё я'.chr(194).chr(160).'ношу с'.chr(194).chr(160).'собой.', $engine->process('Всё своё я ношу с собой.'));
 		}
 
 		public function testHellips() {

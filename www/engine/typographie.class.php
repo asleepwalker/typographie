@@ -124,7 +124,7 @@
 				$actions['/^[ ]([-—][ ])/um']                                   = '$1';
 				$actions['/(?<=[.,!?:)])(?=[^ \n"\'.,;!?&:\]\)<»{)])/u']        = ' ';
 				$actions['/[ ]*(?=[.,;!?:])/u']                                 = '';
-				if (in_array('nbsp', $this->_actions)) $actions['/ ([-—])/']    = ' $1';
+				if (in_array('nbsp', $this->_actions)) $actions['/ ([-—])/']    = chr(194).chr(160).'$1';
 			}
 
 			// Градусы, минуты/футы, секунды/дюймы, ч.1
@@ -158,12 +158,14 @@
 			}
 
 			// Неразрывные пробелы
-			if (in_array('nbsp', $this->_actions))
-				$actions['/([\s][a-zа-яёіїєґ\'′]{1,2})[ ]/iu'] = '$1 ';
+			if (in_array('nbsp', $this->_actions)) {
+				$actions['/((^|[\s])[a-zа-яёіїєґ\'′]{1,2})[ ]/iu'] = '$1'.chr(194).chr(160);
+			}
 
 			// Символ троеточия
-			if (in_array('hellip', $this->_actions))
-				$actions['/[.]{2,5}/']                         = '…';
+			if (in_array('hellip', $this->_actions)) {
+				$actions['/\.{2,5}/']                         = '…';
+			}
 
 			// Выполняем операции замены
 			$exceptions = array();
@@ -171,10 +173,12 @@
 			$this->preserve_part('/^[a-z0-9_.+-]+@[a-z0-9-]+\.[a-z0-9-.]+$/ui', $exceptions, $text); // E-mail
 			$this->preserve_part('/((([a-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[a-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[a-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/u', $exceptions, $text); // URI
 			$this->preserve_part('/[:;.][\'_-]{0,2}[.,edpobnsu*#@|()&\$308ехорвъэ]/ui', $exceptions, $text); // Смайлы
-			foreach ($actions as $key => $val)
+			foreach ($actions as $key => $val) {
 				$text = preg_replace($key, $val, $text);
-			foreach ($exceptions as $code => $content)
+			}
+			foreach ($exceptions as $code => $content) {
 				$text = str_replace('{'.$code.'}', $content, $text);
+			}
 
 			// Вложенные кавычки
 			if (in_array('inquot', $this->_actions))

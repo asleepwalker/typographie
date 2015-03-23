@@ -20,6 +20,267 @@
 			$this->_actions = explode(',', $actionlist);
 		}
 
+		public function process($text) {
+
+			// Спецсимволы
+			if (in_array('specials', $this->_actions)) {
+				$this->processSpecials($text);
+			}
+
+			// Математические символы
+			if (in_array('mathchars', $this->_actions)) {
+				$this->processMath($text);
+			}
+
+			// Минус перед числами
+			if (in_array('mathchars', $this->_actions) || in_array('dashes', $this->_actions)) {
+				$this->processMinuses($text);
+			}
+
+			// Отступы в пунктуации
+			if (in_array('punctuation', $this->_actions)) {
+				$this->processPunctuation($text);
+			}
+
+			// Отступы вокруг спецсимволов
+			if (in_array('specialspaces', $this->_actions)) {
+				$this->processSpecialSpaces($text);
+			}
+
+			// Градусы, минуты/футы, секунды/дюймы
+			if (in_array('angles', $this->_actions)) {
+				$this->processAngles($text);
+			}
+
+			// Двойные+ пробелы
+			if (in_array('dblspace', $this->_actions)) {
+				$this->processMultipleSpaces($text);
+			}
+
+			// Кавычки
+			if (in_array('quotes', $this->_actions)) {
+				$this->processQoutes($text);
+
+				// Вложенные кавычки
+				if (in_array('inquot', $this->_actions))
+					$this->processInnerQoutes($text);
+				else {
+					$this->processStackingQoutes($text);
+				}
+			}
+
+			// Тире, минус, интервал
+			if (in_array('dashes', $this->_actions)) {
+				$this->processDashes($text);
+			}
+
+			// Неразрывные пробелы
+			if (in_array('nbsp', $this->_actions)) {
+				$this->processNbsps($text);
+			}
+
+			// Символ троеточия
+			if (in_array('hellip', $this->_actions)) {
+				$this->processHellips($text);
+			}
+
+			return $text;
+		}
+
+		protected function processSpecials(&$text) {
+			$actions = array(
+				'/(\([cс]\))|(\{copy\})/ui'          => '©',
+				'/(\(r\))|(\{reg\})/ui'              => '®',
+				'/(\((тм|tm)\))|(\{(tm|trade)\})/ui' => '™',
+				'/\{(ss|sect)}/'                     => '§',
+				'/\{(\*|deg)}/'                      => '°',
+				'/\{euro}/'                          => '€',
+				'/\{cent}/'                          => '¢',
+				'/\{pound}/'                         => '£',
+				'/\{(yen|yuan)}/'                    => '¥',
+				'/\{alpha\}/ui'                      => 'α',
+				'/\{beta\}/ui'                       => 'β',
+				'/\{gamma\}/ui'                      => 'γ',
+				'/\{delta\}/ui'                      => 'δ',
+				'/\{epsilon\}/ui'                    => 'ε',
+				'/\{theta\}/ui'                      => 'θ',
+				'/\{lambda\}/ui'                     => 'λ',
+				'/\{mu\}/ui'                         => 'μ',
+				'/\{nu\}/ui'                         => 'ν',
+				'/\{pi\}/ui'                         => 'π',
+				'/\{rho\}/ui'                        => 'ρ',
+				'/\{sigma\}/ui'                      => 'σ',
+				'/\{tau\}/ui'                        => 'τ',
+				'/\{phi\}/ui'                        => 'φ',
+				'/\{psi\}/ui'                        => 'Ψ',
+				'/\{omega\}/ui'                      => 'ω'
+			);
+
+			$this->performActions($text, $actions);
+		}
+
+		protected function processMath(&$text) {
+			$actions = array(
+				'/\{!=}/'           => '≠',
+				'/\{~}/'            => '≈',
+				'/\{equal}/'        => '≡',
+				'/\{<=}/'           => '⩽',
+				'/\{=>}/'           => '⩾',
+				'/\+-/'             => '±',
+				'/\{-}/'            => '–',
+				'/<->/'             => '↔',
+				'/<=>/'             => '⇔',
+				'/<-/'              => '←',
+				'/<=/'              => '⇐',
+				'/->/'              => '→',
+				'/=>/'              => '⇒',
+				'/\{\^1}/'          => '¹',
+				'/\{\^2}/'          => '²',
+				'/\{\^3}/'          => '³',
+				'/\{1\/8}/'         => '⅛',
+				'/\{1\/6}/'         => '⅙',
+				'/\{1\/5}/'         => '⅕',
+				'/\{1\/4}/'         => '¼',
+				'/\{1\/3}/'         => '⅓',
+				'/\{1\/2}/'         => '½',
+				'/\{2\/5}/'         => '⅖',
+				'/\{2\/3}/'         => '⅔',
+				'/\{3\/8}/'         => '⅜',
+				'/\{3\/5}/'         => '⅗',
+				'/\{3\/4}/'         => '¾',
+				'/\{4\/5}/'         => '⅘',
+				'/\{5\/6}/'         => '⅚',
+				'/\{5\/8}/'         => '⅝',
+				'/\{7\/8}/'         => '⅞',
+				'/\{part}/'         => '∂',
+				'/\{any}/'          => '∀',
+				'/\{exist}/'        => '∃',
+				'/\{empty}/'        => '∅',
+				'/\{infinity}/'     => '∞',
+				'/\{belong}/'       => '∈',
+				'/\{!belong}/'      => '∉',
+				'/\{union}/'        => '∪',
+				'/\{intersection}/' => '∩',
+				'/\{v}/'            => '√',
+				'/\{v3}/'           => '∛',
+				'/\{v4}/'           => '∜',
+				'/\{ang}/'          => '∠'
+			);
+
+			$this->performActions($text, $actions);
+		}
+
+		protected function processMinuses(&$text) {
+			$text = preg_replace('/((?<=[ ])-(?=[\d])|(^-(?=[\d])))/', '–', $text);
+		}
+
+		protected function processPunctuation(&$text) {
+			$actions = array();
+
+			if (in_array('dashes', $this->_actions)) {
+				$actions['/[-]{2,5}/']                               = '—';
+			}
+
+			$actions['/([ ]+([-—])[ ]*)|([ ]*([-—])[ ]+)/u']         = ' $2$4 ';
+			$actions['/^[ ]([-—][ ])/um']                            = '$1';
+			$actions['/(?<=[.,!?:)])(?=[^ \n"\'.,;!?&:\]\)<»{)])/u'] = ' ';
+			$actions['/[ ]*(?=[.,;!?:])/u']                          = '';
+
+			if (in_array('nbsp', $this->_actions)) {
+				$actions['/ ([-—])/']                                = chr(194).chr(160).'$1';
+			}
+
+			$exceptions = array();
+			$this->preserve_part('/[\d]+([.,][\d]+)+/u', $exceptions, $text); // Дроби, IP
+			$this->preserve_part('/^[a-z0-9_.+-]+@[a-z0-9-]+\.[a-z0-9-.]+$/ui', $exceptions, $text); // E-mail
+			$this->preserve_part('/((([a-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[a-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[a-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/u', $exceptions, $text); // URI
+			$this->preserve_part('/[:;.][\'_-]{0,2}[.,edpobnsu*#@|()&\$308ехорвъэ]/ui', $exceptions, $text); // Смайлы
+			$this->performActions($text, $actions);
+			$this->restore_parts($exceptions, $text);
+		}
+
+		protected function processSpecialSpaces(&$text) {
+			$actions = array(
+				'/([№§])[\s]*(?=[\d])/'       => '$1 ',
+				'/(?<=[\d])[\s]*(?=°[CСF])/u' => ' '
+			);
+
+			$this->performActions($text, $actions);
+		}
+
+		protected function processMultipleSpaces(&$text) {
+			$text = preg_replace('/[ ]{2,}/', ' ', $text);
+		}
+
+		protected function processQoutes(&$text) {
+			$actions = array(
+				'/(^|[\s>};\(\[-])"/'          => '$1«',
+				'/"([\s-\.!,:;\?\)\]\n\r]|$)/' => '»$1',
+				'/([^\s{])"([^\s}])/'          => '$1»$2'
+			);
+
+			$this->performActions($text, $actions);
+		}
+
+		protected function processInnerQoutes(&$text) {
+			while (preg_match('/(«[^«»]*)«/mu', $text)) {
+				$text = preg_replace('/(«[^«»]*)«/mu', '$1„', $text);
+				$text = preg_replace('/(„[^„“«»]*)»/mu', '$1“', $text);
+			}
+		}
+
+		protected function processStackingQoutes(&$text) {
+			$actions = array(
+				'/«{2,}/' => '«',
+				'/»{2,}/' => '»'
+			);
+
+			$this->performActions($text, $actions);
+		}
+
+		protected function processDashes(&$text) {
+			$actions = array(
+				'/(^|\n|["„«])--?(\s)/u' => '$1—$2',
+				'/(?<=[\d])-(?=[\d])/'   => '–'
+			);
+
+			if (in_array('nbsp', $this->_actions)) {
+				$actions['/( |\s)--?(\s)/']       = chr(194).chr(160).'—$2';
+			} else {
+				$actions['/(\s)--?(\s)/']         = ' —$2';
+			}
+
+			$this->performActions($text, $actions);
+		}
+
+		protected function processAngles(&$text) {
+			$actions = array(
+				'/([\d.]+)\*/'           => '$1°',
+				'/([\d.]+)\'/'            => '$1′',
+				'/(?<=»)([^«]+?[\d.]+)»/' => '$1″'
+			);
+
+			$this->performActions($text, $actions);
+
+			if (strpos($text, '«') === false) {
+				$text = preg_replace('/([\d.]+)»/', '$1″', $text);
+			}
+		}
+
+		protected function processNbsps(&$text) {
+			$text = preg_replace('/((^|[\s])[a-zа-яёіїєґ\'′]{1,2})[ ]/iu', '$1'.chr(194).chr(160), $text);
+		}
+
+		protected function processHellips(&$text) {
+			$text = preg_replace('/\.{2,5}/', '…', $text);
+		}
+
+		private function performActions(&$text, $actions) {
+			foreach ($actions as $key => $val) {
+				$text = preg_replace($key, $val, $text);
+			}
+		}
+
 		protected function preserve_part($pattern, &$pieces, &$text) {
 			$text = preg_replace_callback($pattern, function ($match) use (&$pieces) {
 				$code = substr(md5($match[0]), 0, 8);
@@ -28,177 +289,10 @@
 			}, $text);
 		}
 
-		public function process($text) {
-			$actions = array();
-
-			// Спецсимволы
-			if (in_array('specials', $this->_actions)) {
-				$actions['/(\([cс]\))|(\{copy\})/ui']          = '©';
-				$actions['/(\(r\))|(\{reg\})/ui']              = '®';
-				$actions['/(\((тм|tm)\))|(\{(tm|trade)\})/ui'] = '™';
-				$actions['/\{(ss|sect)}/']                     = '§';
-				$actions['/\{(\*|deg)}/']                      = '°';
-
-				$actions['/\{euro}/']                          = '€';
-				$actions['/\{cent}/']                          = '¢';
-				$actions['/\{pound}/']                         = '£';
-				$actions['/\{(yen|yuan)}/']                    = '¥';
-
-				$actions['/\{alpha\}/ui']                      = 'α';
-				$actions['/\{beta\}/ui']                       = 'β';
-				$actions['/\{gamma\}/ui']                      = 'γ';
-				$actions['/\{delta\}/ui']                      = 'δ';
-				$actions['/\{epsilon\}/ui']                    = 'ε';
-				$actions['/\{theta\}/ui']                      = 'θ';
-				$actions['/\{lambda\}/ui']                     = 'λ';
-				$actions['/\{mu\}/ui']                         = 'μ';
-				$actions['/\{nu\}/ui']                         = 'ν';
-				$actions['/\{pi\}/ui']                         = 'π';
-				$actions['/\{rho\}/ui']                        = 'ρ';
-				$actions['/\{sigma\}/ui']                      = 'σ';
-				$actions['/\{tau\}/ui']                        = 'τ';
-				$actions['/\{phi\}/ui']                        = 'φ';
-				$actions['/\{psi\}/ui']                        = 'Ψ';
-				$actions['/\{omega\}/ui']                      = 'ω';
-			}
-
-			// Математические символы
-			if (in_array('mathchars', $this->_actions)) {
-				$actions['/\{!=}/']                            = '≠';
-				$actions['/\{~}/']                             = '≈';
-				$actions['/\{equal}/']                         = '≡';
-				$actions['/\{<=}/']                            = '⩽';
-				$actions['/\{=>}/']                            = '⩾';
-				$actions['/\+-/']                              = '±';
-				$actions['/\{-}/']                             = '–';
-				$actions['/<->/']                              = '↔';
-				$actions['/<=>/']                              = '⇔';
-				$actions['/<-/']                               = '←';
-				$actions['/<=/']                               = '⇐';
-				$actions['/->/']                               = '→';
-				$actions['/=>/']                               = '⇒';
-
-				$actions['/\{\^1}/']                           = '¹';
-				$actions['/\{\^2}/']                           = '²';
-				$actions['/\{\^3}/']                           = '³';
-				$actions['/\{1\/8}/']                          = '⅛';
-				$actions['/\{1\/6}/']                          = '⅙';
-				$actions['/\{1\/5}/']                          = '⅕';
-				$actions['/\{1\/4}/']                          = '¼';
-				$actions['/\{1\/3}/']                          = '⅓';
-				$actions['/\{1\/2}/']                          = '½';
-				$actions['/\{2\/5}/']                          = '⅖';
-				$actions['/\{2\/3}/']                          = '⅔';
-				$actions['/\{3\/8}/']                          = '⅜';
-				$actions['/\{3\/5}/']                          = '⅗';
-				$actions['/\{3\/4}/']                          = '¾';
-				$actions['/\{4\/5}/']                          = '⅘';
-				$actions['/\{5\/6}/']                          = '⅚';
-				$actions['/\{5\/8}/']                          = '⅝';
-				$actions['/\{7\/8}/']                          = '⅞';
-
-				$actions['/\{part}/']                          = '∂';
-				$actions['/\{any}/']                           = '∀';
-				$actions['/\{exist}/']                         = '∃';
-				$actions['/\{empty}/']                         = '∅';
-				$actions['/\{infinity}/']                      = '∞';
-				$actions['/\{belong}/']                        = '∈';
-				$actions['/\{!belong}/']                       = '∉';
-				$actions['/\{union}/']                         = '∪';
-				$actions['/\{intersection}/']                  = '∩';
-				$actions['/\{v}/']                             = '√';
-				$actions['/\{v3}/']                            = '∛';
-				$actions['/\{v4}/']                            = '∜';
-				$actions['/\{ang}/']                           = '∠';
-			}
-
-			// Минус перед числами
-			if (in_array('dashes', $this->_actions)) {
-				$actions['/((?<=[ ])-(?=[\d])|(^-(?=[\d])))/'] = '–';
-			}
-
-			// Отступы в пунктуации
-			if (in_array('punctuation', $this->_actions)) {
-				if (in_array('dashes', $this->_actions)) $actions['/[-]{2,5}/'] = '—';
-				$actions['/([ ]+([-—])[ ]*)|([ ]*([-—])[ ]+)/u']                = ' $2$4 ';
-				$actions['/^[ ]([-—][ ])/um']                                   = '$1';
-				$actions['/(?<=[.,!?:)])(?=[^ \n"\'.,;!?&:\]\)<»{)])/u']        = ' ';
-				$actions['/[ ]*(?=[.,;!?:])/u']                                 = '';
-				if (in_array('nbsp', $this->_actions)) $actions['/ ([-—])/']    = chr(194).chr(160).'$1';
-			}
-
-			// Градусы, минуты/футы, секунды/дюймы, ч.1
-			if (in_array('angles', $this->_actions)) {
-				$actions['/([\d.]+)\*/']                       = '$1°';
-				$actions['/([\d.]+)\'/']                       = '$1′';
-			}
-
-			// Отступы вокруг спецсимволов
-			if (in_array('specialspaces', $this->_actions)) {
-				$actions['/([№§])[\s]*(?=[\d])/']              = '$1 ';
-				$actions['/(?<=[\d])[\s]*(?=°[CСF])/u']        = ' ';
-			}
-
-			// Кавычки-ёлочки
-			$actions['/(^|[\s>};\(\[-])"/']                    = '$1«';
-			$actions['/"([\s-\.!,:;\?\)\]\n\r]|$)/']           = '»$1';
-			$actions['/([^\s{])"([^\s}])/']                    = '$1»$2';
-
-			// Двойные+ пробелы
-			if (in_array('dblspace', $this->_actions))
-				$actions['/[ ]{2,}/']                          = ' ';
-
-			// Тире, минус, интервал
-			if (in_array('dashes', $this->_actions)) {
-				$actions['/(^|\n|["„«])--?(\s)/u']             = '$1—$2';
-				$actions['/(?<=[\d])-(?=[\d])/']               = '–';
-				if (in_array('nbsp', $this->_actions))
-				     $actions['/( |\s)--?(\s)/']               = ' —$2';
-				else $actions['/(\s)--?(\s)/']                 = ' —$2';
-			}
-
-			// Неразрывные пробелы
-			if (in_array('nbsp', $this->_actions)) {
-				$actions['/((^|[\s])[a-zа-яёіїєґ\'′]{1,2})[ ]/iu'] = '$1'.chr(194).chr(160);
-			}
-
-			// Символ троеточия
-			if (in_array('hellip', $this->_actions)) {
-				$actions['/\.{2,5}/']                         = '…';
-			}
-
-			// Выполняем операции замены
-			$exceptions = array();
-			$this->preserve_part('/[\d]+([.,][\d]+)+/u', $exceptions, $text); // Дроби, IP
-			$this->preserve_part('/^[a-z0-9_.+-]+@[a-z0-9-]+\.[a-z0-9-.]+$/ui', $exceptions, $text); // E-mail
-			$this->preserve_part('/((([a-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[a-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[a-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/u', $exceptions, $text); // URI
-			$this->preserve_part('/[:;.][\'_-]{0,2}[.,edpobnsu*#@|()&\$308ехорвъэ]/ui', $exceptions, $text); // Смайлы
-			foreach ($actions as $key => $val) {
-				$text = preg_replace($key, $val, $text);
-			}
-			foreach ($exceptions as $code => $content) {
+		protected function restore_parts($pieces, &$text) {
+			foreach ($pieces as $code => $content) {
 				$text = str_replace('{'.$code.'}', $content, $text);
 			}
-
-			// Вложенные кавычки
-			if (in_array('inquot', $this->_actions))
-				while (preg_match('/(«[^«»]*)«/mu', $text)) {
-					$text = preg_replace('/(«[^«»]*)«/mu', '$1„', $text);
-					$text = preg_replace('/(„[^„“«»]*)»/mu', '$1“', $text);
-				}
-			else {
-				// Дублирующие кавычки сливаются в одни
-				$text = preg_replace('/«{2,}/', '«', $text);
-				$text = preg_replace('/»{2,}/', '»', $text);
-			}
-
-			// Градусы, минуты/футы, секунды/дюймы, ч.2
-			if (in_array('angles', $this->_actions)) {
-				$text = preg_replace('/(?<=»)([^«]+?[\d.]+)»/', '$1″', $text);
-				if (strpos($text, '«') === false)
-					$text = preg_replace('/([\d.]+)»/', '$1″', $text);
-			}
-
-			return $text;
 		}
+
 	};

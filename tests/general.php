@@ -13,7 +13,7 @@
 		}
 
 		public function testQuotes() {
-			$engine = new Typographie('inquot');
+			$engine = new Typographie('quotes,inquot');
 			$this->assertEquals('Проверка «кавычек»', $engine->process('Проверка "кавычек"'));
 			$this->assertEquals('Проверка «последовательности» «кавычек»', $engine->process('Проверка "последовательности" "кавычек"'));
 			$this->assertEquals('«Кавычки» в начале строки', $engine->process('"Кавычки" в начале строки'));
@@ -24,7 +24,7 @@
 			$this->assertEquals('«„Вложенные“ кавычки» в начале строки', $engine->process('""Вложенные" кавычки" в начале строки'));
 			$this->assertEquals('Вложенные кавычки «в конце „строки“»', $engine->process('Вложенные кавычки "в конце "строки""'));
 
-			$engine->actions('');
+			$engine->actions('quotes');
 			$this->assertEquals('Проверка склеивания «вложенных «кавычек»', $engine->process('Проверка склеивания «вложенных «кавычек»»'));
 		}
 

@@ -202,7 +202,8 @@
 		protected function processSpecialSpaces(&$text) {
 			$actions = array(
 				'/([№§])[\s]*(?=[\d])/'       => '$1 ',
-				'/(?<=[\d])[\s]*(?=°[CСF])/u' => ' '
+				'/(?<=[\d])[\s]*(?=°[CСF])/u' => ' ',
+				'/(?<=[\d])[\s]*(?=%)/u'      => ''
 			);
 
 			$this->performActions($text, $actions);

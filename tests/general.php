@@ -97,6 +97,7 @@
 			$engine = new Typographie('specialspaces');
 			$this->assertEquals('№ 1, § 1', $engine->process('№1, §1'));
 			$this->assertEquals('-39 °C = -38.2 °F', $engine->process('-39°C = -38.2°F'));
+			$this->assertEquals('25%', $engine->process('25 %'));
 		}
 
 	}

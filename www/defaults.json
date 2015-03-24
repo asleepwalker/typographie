@@ -4,6 +4,10 @@
 		"name": "live", "group": "editor",
 		"send": false, "active": true
 	},{
+		"caption": "Кавычки: "" > «»",
+		"name": "quotes", "group": "action",
+		"send": true, "active": true
+	},{
 		"caption": "Вложенные кавычки: «„“»",
 		"name": "inquot", "group": "action",
 		"send": true, "active": true

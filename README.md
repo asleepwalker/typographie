@@ -46,7 +46,8 @@ Encoding — UTF-8.
 
 #### Available actions
 
-`inquot` : Nested quotes: «„“» (otherwise — duplicate quotes stashing).<br>
+`quotes` : Correction of quotes: "" becomes «».<br>
+`inquot` (needs `quotes`) : Nested quotes: «„“» (otherwise — duplicate quotes stashing).<br>
 `dashes` : If necessary replace hyphens with dashes and minus signs.<br>
 `angles` : Replace asterisks and quotes with degrees, feet, inches.<br>
 `dblspace` : Fix duplicate spaces in the text.<br>

@@ -90,6 +90,7 @@
 			$engine = new Typographie('punctuation');
 			$this->assertEquals('Я, видимо, очень плохо учился в школе - но сейчас не экзамен же!', $engine->process('Я ,видимо , очень плохо учился в школе -но сейчас не экзамен же !'));
 			$this->assertEquals('Кроме того, я не понимаю: неужели и так непонятно?!', $engine->process('Кроме того , я не понимаю:неужели и так непонятно ? !'));
+			$this->assertEquals('- И не знаю - нужно ли - отбивать тире -', $engine->process('-И не знаю -нужно ли- отбивать тире-'));
 		}
 
 		public function testFixingOfSpacing() {

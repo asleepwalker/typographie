@@ -241,14 +241,14 @@
 
 		protected function processDashes(&$text) {
 			$actions = array(
-				'/(^|\n|["„«])--?($|\s)/u' => '$1—$2',
+				'/(^|\n|["„«])--?(\s)/u' => '$1—$2',
 				'/(?<=[\d])-(?=[\d])/'     => '–'
 			);
 
 			if (in_array('nbsp', $this->_actions)) {
-				$actions['/(\s)--?(\s)/']  = chr(194).chr(160).'—$2';
+				$actions['/(\s)--?($|\s)/']  = chr(194).chr(160).'—$2';
 			} else {
-				$actions['/(\s)--?(\s)/']  = ' —$2';
+				$actions['/(\s)--?($|\s)/']  = ' —$2';
 			}
 
 			$this->performActions($text, $actions);

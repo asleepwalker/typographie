@@ -25,6 +25,31 @@ url = "http://api.typographie.ru/"<br>
 params = urllib.urlencode({"raw":"Your text."})<br>
 f = urllib.urlopen(url, params)<br>
 print f.read()</code>
+			<h2>Node.js</h2>
+			<code>var http = require('http');<br>
+var qs = require('qs');<br>
+<br>
+var data = qs.stringify({ raw: 'Your text.' });<br>
+var options = {<br>
+&nbsp;&nbsp;hostname: 'api.typographie.ru',<br>
+&nbsp;&nbsp;port: 80,<br>
+&nbsp;&nbsp;path: '/',<br>
+&nbsp;&nbsp;method: 'POST',<br>
+&nbsp;&nbsp;headers: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'Content-Type': 'application/x-www-form-urlencoded',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'Content-Length': data.length<br>
+&nbsp;&nbsp;}<br>
+};<br>
+<br>
+var request = http.request(options, function(response) {<br>
+&nbsp;&nbsp;response.setEncoding('utf8');<br>
+&nbsp;&nbsp;response.on('data', function (responseBody) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;console.log(JSON.parse(responseBody).result);<br>
+&nbsp;&nbsp;});<br>
+});<br>
+<br>
+request.write(data);<br>
+request.end();</code>
 			<h2>Parser3</h2>
 			<code>@typographie[sRaw][jResponse;oResponse;result]<br>
 &nbsp;&nbsp;^curl:session{<br>

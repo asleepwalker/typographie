@@ -1,7 +1,7 @@
 <?php
 
 	/*
-	*	Typographie, v1.2.0
+	*	Typographie, v1.2.1
 	*	(c) 2014–2015 Artyom "Sleepwalker" Fedosov <mail@asleepwalker.ru>
 	*	https://github.com/asleepwalker/typographie
 	*/
@@ -128,6 +128,8 @@
 				'/\{=>}/'           => '⩾',
 				'/\+-/'             => '±',
 				'/\{-}/'            => '–',
+				'/\{multiple}/'     => '×',
+				'/\{divide}/'       => '÷',
 				'/<->/'             => '↔',
 				'/<=>/'             => '⇔',
 				'/<-/'              => '←',
@@ -155,6 +157,7 @@
 				'/\{part}/'         => '∂',
 				'/\{any}/'          => '∀',
 				'/\{exist}/'        => '∃',
+				'/\{sum}/'          => 'Σ',
 				'/\{empty}/'        => '∅',
 				'/\{infinity}/'     => '∞',
 				'/\{belong}/'       => '∈',

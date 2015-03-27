@@ -67,7 +67,7 @@ List should be comma separated, somethink like `action1,action2,action3`.
 The response comes in the JSON format.
 
 ```
-{"version":"1.2.0","result":"Your text."}
+{"version":"1.2.1","result":"Your text."}
 ```
 
 #### Error codes

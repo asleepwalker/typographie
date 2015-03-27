@@ -2,7 +2,8 @@
 <div id="help">
 	<?php include('help.php') ?>
 		<article>
-			<p><b>12.03.2015</b>: Вышла версия <b>1.2.0</b>:
+			<p><b>27.03.2015</b>: Вышла версия <b>1.2.1</b>: Добавлены спецсимволы умножения, деления и суммирования</p>
+			<p><b>24.03.2015</b>: Вышла версия <b>1.2.0</b>:
 				<ul>
 					<li>Добавлено автоматическое тестирование</li>
 					<li>Ядро сервиса доступно для установки через <a href="https://packagist.org/packages/asleepwalker/typographie" rel="nofollow">Composer</a></li>

@@ -1,7 +1,7 @@
 <?php
 
 	/*
-	*	Typographie, v1.2.1
+	*	Typographie, v1.2.2
 	*	(c) 2014–2015 Artyom "Sleepwalker" Fedosov <mail@asleepwalker.ru>
 	*	https://github.com/asleepwalker/typographie
 	*/
@@ -250,9 +250,9 @@
 			);
 
 			if (in_array('nbsp', $this->_actions)) {
-				$actions['/(\s)--?($|\s)/']  = chr(194).chr(160).'—$2';
+				$actions['/(\s)--?($|\s)/u']  = chr(194).chr(160).'—$2';
 			} else {
-				$actions['/(\s)--?($|\s)/']  = ' —$2';
+				$actions['/(\s)--?($|\s)/u']  = ' —$2';
 			}
 
 			$this->performActions($text, $actions);

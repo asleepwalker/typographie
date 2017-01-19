@@ -13,11 +13,11 @@ Available as online service at [typographie.ru](http://typographie.ru/)
 
 Require packet in a composer.json
 
-    "asleepwalker/typographie": "~1.2.0"
+    "asleepwalker/typographie": "~1.3.0"
 
 Run Composer: `php composer.phar install`
 
-    composer require asleepwalker/typographie "~1.2.0"
+    composer require asleepwalker/typographie "~1.3.0"
 
 ## Example
 
@@ -93,7 +93,7 @@ List should be comma separated, somethink like `action1,action2,action3`.
 The response comes in the JSON format.
 
 ```
-{"version":"1.2.2","result":"Your text."}
+{"version":"1.3.0","result":"Your text."}
 ```
 
 #### Error codes

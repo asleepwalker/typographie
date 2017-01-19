@@ -1,5 +1,6 @@
 <?php
 
+namespace asleepwalker\typographie;
 	/*
 	*	Typographie, v1.2.2
 	*	(c) 2014–2017 Artyom "Sleepwalker" Fedosov <mail@asleepwalker.ru>

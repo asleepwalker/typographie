@@ -1,8 +1,9 @@
 <?php
+    require_once('Typographie.php');
+    use asleepwalker\typographie\Typographie;
 
 	$raw = 'Сервис "Typographie" - подготовка текстов к веб-публикации онлайн (с) 2014-2017';
 
-	require_once('typographie.class.php');
 	$engine = new Typographie('quotes,dashes,specials,paragraphs');
 	$result = $engine->process($raw);
 

@@ -9,7 +9,7 @@ F<?php
 	class TypographieTest extends PHPUnit_Framework_TestCase {
 
 		public function __construct() {
-			require_once('lib/typographie.class.php');
+			require_once('lib/Typographie.php');
 		}
 
 		public function testQuotes() {

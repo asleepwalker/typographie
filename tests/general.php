@@ -6,11 +6,10 @@ F<?php
 	*	https://github.com/asleepwalker/typographie
 	*/
 
-	class TypographieTest extends PHPUnit_Framework_TestCase {
+	require_once('lib/Typographie.php');
+	use asleepwalker\typographie\Typographie;
 
-		public function __construct() {
-			require_once('lib/Typographie.php');
-		}
+	class TypographieTest extends PHPUnit_Framework_TestCase {
 
 		public function testQuotes() {
 			$engine = new Typographie('quotes,inquot');

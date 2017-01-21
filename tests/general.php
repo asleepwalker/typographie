@@ -1,4 +1,4 @@
-F<?php
+<?php
 
 	/*
 	*	Typographie, v1.3.0

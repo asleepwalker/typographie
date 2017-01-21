@@ -1,4 +1,5 @@
 <?php
+
     require_once('Typographie.php');
     use asleepwalker\typographie\Typographie;
 

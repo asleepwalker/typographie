@@ -1,13 +1,14 @@
 <?php
 
 	/*
-	*	Typographie, v1.2.2
+	*	Typographie, v1.3.0
 	*	(c) 2014–2017 Artyom "Sleepwalker" Fedosov <mail@asleepwalker.ru>
 	*	https://github.com/asleepwalker/typographie
 	*/
 
 	$rules = json_decode(file_get_contents('rules.json'), true);
-	require_once('../engine/typographie.class.php');
+	require_once('../engine/Typographie.php');
+	use asleepwalker\typographie\Typographie;
 
 	if (!isset($_POST['raw'])) returnError(1);
 	if (isset($_POST['actions']) && ($_POST['actions'] == '')) returnError(2);

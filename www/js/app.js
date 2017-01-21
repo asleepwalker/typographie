@@ -1,5 +1,5 @@
 /*
-*	Typographie, v1.2.2
+*	Typographie, v1.3.0
 *	(c) 2014–2017 Artyom "Sleepwalker" Fedosov <mail@asleepwalker.ru>
 *	https://github.com/asleepwalker/typographie
 */

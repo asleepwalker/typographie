@@ -1,7 +1,7 @@
 <?php
 
 	/*
-	*	Typographie, v1.2.2
+	*	Typographie, v1.3.0
 	*	(c) 2014–2017 Artyom "Sleepwalker" Fedosov <mail@asleepwalker.ru>
 	*	https://github.com/asleepwalker/typographie
 	*/
@@ -11,8 +11,9 @@
 		exit;
 	}
 
-	require_once('typographie.class.php');
+	require_once('Typographie.php');
 	require_once('converter.class.php');
+
 	$engine = new TypographieModes($_POST['actions']);
 	$engine->mode($_POST['in'], $_POST['out']);
 	$result = $engine->process($_POST['raw']);

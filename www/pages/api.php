@@ -27,7 +27,7 @@
 			<p>Список действий перечисляется через запятую, вида <i><tt>action1,action2,action3</tt></i>.</p>
 			<h2>Пример ответа</h2>
 			<p>Ответ приходит в формате JSON.</p>
-			<code>{"version":"1.2.2","result":"Your text."}</code>
+			<code>{"version":"1.3.0","result":"Your text."}</code>
 			<h2>Коды ошибок</h2>
 			<p><b><tt>BAD_REQUEST</tt></b> : Не получен обязательный параметр — текст для обработки (<b><i>raw</i></b>).<br>
 			<b><tt>ACTIONLIST_EMPTY</tt></b> : Не указано ни одно действие. Все действия — не передавайте <b><i>actions</i></b> вообще<br>

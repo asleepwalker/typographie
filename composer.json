@@ -12,6 +12,11 @@
             "homepage": "http://me.asleepwalker.ru/en/"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "asleepwalker\\typographie\\": "lib/"
+        }
+    },
     "require-dev": {
         "phpunit/phpunit": "4.5.*"
     },

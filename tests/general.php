@@ -1,7 +1,7 @@
 F<?php
 
 	/*
-	*	Typographie, v1.2.2
+	*	Typographie, v1.3.0
 	*	(c) 2014–2017 Artyom "Sleepwalker" Fedosov <mail@asleepwalker.ru>
 	*	https://github.com/asleepwalker/typographie
 	*/
@@ -9,7 +9,7 @@ F<?php
 	class TypographieTest extends PHPUnit_Framework_TestCase {
 
 		public function __construct() {
-			require_once('lib/typographie.class.php');
+			require_once('lib/Typographie.php');
 		}
 
 		public function testQuotes() {

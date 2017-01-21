@@ -9,57 +9,41 @@ Available as online service at [typographie.ru](http://typographie.ru/)
 
 <img src="https://cloud.githubusercontent.com/assets/5080313/3941661/a14f1f14-253a-11e4-82a3-988cdd0b297e.png" alt="typographie" />
 
-## Installation
-
-Require packet in a composer.json
-
-    "asleepwalker/typographie": "~1.3.0"
-
-Run Composer: `php composer.phar install`
-
-    composer require asleepwalker/typographie "~1.3.0"
-
-## Example
-
-Require packet in a composer.json
-```
-<?php
-use asleepwalker\typographie\Typographie;
-
-	$raw = 'Сервис "Typographie" - подготовка текстов к веб-публикации онлайн (с) 2014-2017';
-	$engine = new Typographie('inquot,dashes,specials,paragraphs');
-	$result = $engine->process($raw);
-
-	echo $result;
-	// > Сервис «Typographie» — подготовка текстов к веб-публикации онлайн © 2014–2017
-
-```
-
 ## Library
 
 You can use Typographie as a standalone library in your PHP project.
 
+### Installation
+
+Add package to the composer.json:
+
+	composer require asleepwalker/typographie "~1.3.0"
+
+Run Composer:
+
+	php composer.phar install
+
+
+### Example
+
 ```
 <?php
 
-	$raw = 'Сервис "Typographie" - подготовка текстов к веб-публикации онлайн (с) 2014-2017';
+	use asleepwalker\typographie\Typographie;
 
-	require_once('Typographie.php');
+	$raw = 'Сервис "Typographie" - подготовка текстов к веб-публикации онлайн (с) 2014-2017';
 	$engine = new Typographie('inquot,dashes,specials,paragraphs');
 	$result = $engine->process($raw);
 
 	echo $result;
 	// > Сервис «Typographie» — подготовка текстов к веб-публикации онлайн © 2014–2017
-
 ```
-
-Include `lib/typographie.class.php` or install using Composer `asleepwalker/typographie`.
 
 ## API
 
 Web service also has API.
 
-For processing text, you need to create HTTP request and send params using POST method to URL http://api.typographie.ru/.
+For processing text, you need to create HTTP request and send params using POST method to `https://api.typographie.ru/`
 
 #### Parameters
 
@@ -92,9 +76,7 @@ List should be comma separated, somethink like `action1,action2,action3`.
 
 The response comes in the JSON format.
 
-```
-{"version":"1.3.0","result":"Your text."}
-```
+	{"version":"1.3.0","result":"Your text."}
 
 #### Error codes
 

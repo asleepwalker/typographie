@@ -6,9 +6,11 @@
 	*	https://github.com/asleepwalker/typographie
 	*/
 
-	$rules = json_decode(file_get_contents('rules.json'), true);
-	require_once('../engine/Typographie.php');
+	require __DIR__.'/../../vendor/autoload.php';
+
 	use asleepwalker\typographie\Typographie;
+
+	$rules = json_decode(file_get_contents('rules.json'), true);
 
 	if (!isset($_POST['raw'])) returnError(1);
 	if (isset($_POST['actions']) && ($_POST['actions'] == '')) returnError(2);

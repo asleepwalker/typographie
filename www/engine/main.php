@@ -6,13 +6,13 @@
 	*	https://github.com/asleepwalker/typographie
 	*/
 
+	use asleepwalker\typographie\Typographie;
+	require_once('converter.class.php');
+
 	if (!(isset($_POST['raw']) && isset($_POST['actions']) && isset($_POST['in']) && isset($_POST['out']) && isset($_POST['highlight']))) {
 		echo json_encode(array('error' => '1'));
 		exit;
 	}
-
-	require_once('Typographie.php');
-	require_once('converter.class.php');
 
 	$engine = new TypographieModes($_POST['actions']);
 	$engine->mode($_POST['in'], $_POST['out']);

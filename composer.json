@@ -1,8 +1,9 @@
 {
-    "name": "asleepwalker/typographie",
-    "description": "Preparation of russian texts before web publication.",
+    "name": "asleepwalker/typographie.ru",
+    "version": "2.0.0",
+    "description": "Web service for preparation of russian texts to web publication",
     "keywords": ["text", "web", "typography", "publication", "articles", "copywriting", "auto", "preparation", "russian"],
-    "homepage": "https://github.com/asleepwalker/typographie",
+    "homepage": "https://github.com/asleepwalker/typographie.php",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -12,15 +13,7 @@
             "homepage": "http://me.asleepwalker.ru/en/"
         }
     ],
-    "autoload": {
-        "psr-4": {
-            "asleepwalker\\typographie\\": "lib/"
-        }
-    },
-    "require-dev": {
-        "phpunit/phpunit": "4.5.*"
-    },
-    "scripts": {
-        "test": "phpunit"
+    "require": {
+        "asleepwalker/typographie": "^1.3"
     }
 }

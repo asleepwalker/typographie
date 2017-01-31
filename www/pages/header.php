@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="<?= $page ?>">
 	<head>
 		<title><?php if (isset($title)) echo $title.' — '; ?>Typographie</title>
 		<meta charset="utf-8">

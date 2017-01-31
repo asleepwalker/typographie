@@ -31,8 +31,5 @@
 	</div></div>
 </div>
 
-<script type="text/javascript" src="js/underscore.min.js"></script>
-<script type="text/javascript" src="js/backbone.min.js"></script>
-<script type="text/javascript" src="js/backbone.native.min.js"></script>
-<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="app.js"></script>
 <?php include('footer.php') ?>

@@ -1,0 +1,39 @@
+{
+  "name": "typographie.js",
+  "version": "1.3.1",
+  "description": "Web service for preparation of russian texts to web publication",
+  "scripts": {
+    "build": "webpack",
+    "minify": "webpack && uglifyjs ./www/app.js -o ./www/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/asleepwalker/typographie.git"
+  },
+  "keywords": [
+    "text",
+    "web",
+    "typography",
+    "publication",
+    "articles",
+    "copywrighting",
+    "auto",
+    "preparation",
+    "russia"
+  ],
+  "author": "Artyom 'Sleepwalker' Fedosov <mail@asleepwalker.ru>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/asleepwalker/typographie/issues"
+  },
+  "devDependencies": {
+    "gulp": "~3.9.1",
+    "uglify-js": "^2.7.5",
+    "webpack": "~2.2.1"
+  },
+  "dependencies": {
+    "backbone": "~1.3.3",
+    "backbone.native": "~1.0.0",
+    "underscore": "~1.8.3"
+  }
+}

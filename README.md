@@ -1,4 +1,4 @@
-#Typographie &nbsp;[![Build Status](https://travis-ci.org/asleepwalker/typographie.svg?branch=master)](https://travis-ci.org/asleepwalker/typographie)
+#Typographie
 
 Easy-to-use service for basic typographical preparation of russian texts before web publication.<br>
 Also available as an [extension for Google Chrome](https://chrome.google.com/webstore/detail/typographie/afgfkjihapfjmakkehjopdkoljnebape).

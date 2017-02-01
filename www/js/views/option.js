@@ -10,15 +10,11 @@ module.exports = Backbone.View.extend({
 	initialize: function() {
 		this.model.bind('change:active', _.bind(this.render, this));
 	},
-	toggleOption: function() {
+	toggleOption: function(e) {
 		this.model.set({'active': !this.model.get('active')});
 	},
 	render: function() {
 		this.$el.html(this.itemTemplate(this.model.toJSON()));
 		return this;
-	},
-	destroy: function() {
-		this.model.off('change:active');
-		this.el.remove();
 	}
 });

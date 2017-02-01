@@ -7,30 +7,27 @@ var OptionView = require('./option');
 module.exports = Backbone.View.extend({
 	el: $('#options'),
 	initialize: function() {
+		this.model.get('options').bind('update', _.bind(this.render, this));
 		$('#show_options').on('click', _.bind(this.showDialog, this));
 		$('.hide_options').on('click', _.bind(this.hideDialog, this));
 	},
-	optionViewList: [],
 	showDialog: function() {
-		this.render();
 		$('#dialog_wrapper')[0].style.display = 'block';
 	},
 	hideDialog: function(e) {
-		$('#dialog_wrapper')[0].style.display = 'none';
-		this.optionViewList.forEach(function(view) {
-			view.destroy();
-		});
+		if (/hide_options/.test(e.target.className)) {
+			$('#dialog_wrapper')[0].style.display = 'none';
+		}
 	},
 	render: function() {
 		var prevOptionGroup;
-
 		_.each(this.model.get('options').models, function(option) {
-			var optionView = new OptionView({model: option}),
-			    optionElement = optionView.render().el;
-			this.optionViewList.push(optionView);
+			var optionView = new OptionView({model: option});
+			var optionElement = optionView.render().el;
 
-			if (prevOptionGroup && (prevOptionGroup != option.get('group')))
+			if (prevOptionGroup && prevOptionGroup != option.get('group')) {
 				optionElement.className = 'first_in_group';
+			}
 			prevOptionGroup = option.get('group');
 
 			this.el.appendChild(optionElement);

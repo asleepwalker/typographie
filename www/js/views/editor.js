@@ -8,6 +8,7 @@ module.exports = Backbone.View.extend({
 		this.model.bind('change:in', _.bind(this.process, this));
 		this.model.bind('change:out', _.bind(this.process, this));
 		this.model.bind('change:highlight', _.bind(this.process, this));
+		this.model.get('options').bind('change', _.bind(this.process, this));
 	},
 	events: {
 		'click #input .controls #submit': 'process',
@@ -16,16 +17,15 @@ module.exports = Backbone.View.extend({
 	},
 	liveProcess: function() {
 		if (this.model.get('options').where({ name: 'live', active: true }).length) {
-			var editor = this;
-			this.model.state('typing');
-			clearTimeout(this.model.get('live'));
-			this.model.set({'live': window.setTimeout(function() { editor.process(); }, 1000)});
+			this.process();
 		}
 	},
 	process: function() {
-		this.model.process($('#raw_input')[0].value, this.render);
+		var result = this.model.process($('#raw_input')[0].value);
+		result = result.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+		this.render(result);
 	},
-	render: function(data) {
-		$('#display').html(data.response);
+	render: function(result) {
+		$('#display').html(result);
 	}
 });

@@ -1,6 +1,5 @@
 		</div><!-- id="wrap" -->
 		<footer>
-			<div id="loader"></div>
 			<nav><ul>
 				<li><a href="?about">О сервисе</a></li>
 				<li><a href="?api">API</a></li>

@@ -53,9 +53,6 @@ header nav ul li a:before { color: #888; content: '▸'; padding-right: 5px; }
 #content article table.specials td span { background: #FFE5E5; }
 
 footer { background: #EEE; border-top: 1px solid #DDD; bottom: 0; height: 30px; position: fixed; width: 100%; }
-footer #loader { background: url(../i/loader.gif) no-repeat; display: none; height: 15px; left: 10px; position: absolute; top: 7px; width: 165px; }
-footer #loader[data-mode=loading], footer #loader[data-mode=typing] { display: block; }
-footer #loader[data-mode=typing] { opacity: 0.2; }
 footer a { color: #15C; font: 13px/30px "Arial", sans-serif; text-decoration: none; }
 footer a:hover { text-decoration: underline; }
 footer nav { text-align: right; }

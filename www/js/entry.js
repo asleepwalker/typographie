@@ -6,7 +6,6 @@ window.onload = function() {
 	var OutputSwitcherView = require('./views/output-switcher');
 	var HighlightCheckboxView = require('./views/highlight-checkbox');
 	var OptionsDialogView = require('./views/options-dialog');
-	var LoadingView = require('./views/loading');
 
 	var optionsCollection = new OptionsCollection();
 	var typographieModel = new TypographieModel({options: optionsCollection});
@@ -15,5 +14,4 @@ window.onload = function() {
 	var outputSwitcherView = new OutputSwitcherView({model: typographieModel});
 	var highlightCheckboxView = new HighlightCheckboxView({model: typographieModel});
 	var optionsDialogView = new OptionsDialogView({model: typographieModel});
-	var loadingView = new LoadingView({model: typographieModel});
 };

@@ -1,47 +1,35 @@
 var _ = require('underscore');
 var Backbone = require('backbone');
 var $ = require('backbone.native');
+var Typographie = require('typographie');
 
 module.exports = Backbone.Model.extend({
 	defaults: {
 		in: 'plain',
 		out: 'plain',
 		highlight: true,
-		in_state: 'free',
 	},
-	state: function(state) {
-		this.set({in_state: state});
+	initialize: function() {
+		this.engine = new Typographie([]);
+		this.updateActions();
+
+		this.bind('change:in change:out', _.bind(this.updateMode, this));
+		this.get('options').bind('update change:active', _.bind(this.updateActions, this));
 	},
-	process: function(raw, callback) {
-		var core = this;
-		$.ajax({
-			beforeSend: function() {
-				core.state('loading');
-			},
-			data: {
-				in: core.get('in'),
-				out: core.get('out'),
-				highlight: core.get('highlight') ? 'enabled' : 'disabled',
-				actions: (function() {
-					var actions = new Backbone.Collection(core.get('options').where({ send: true,  active: true }));
-					return actions.pluck('name').join(',');
-				}()),
-				raw: raw
-			},
-			type: 'POST',
-			url: 'engine/main.php',
-			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-			dataType: 'json',
-			success: function(data) {
-				core.state('free');
-				callback(data);
-			},
-			error: this.error,
-			timeout: 5000
-		});
+	updateActions: function(e) {
+		var actionlist = this.get('options')
+			.where({ send: true, active: true })
+			.map(function (model) {
+				return model.get('name');
+			});
+		this.engine.actions(actionlist);
 	},
-	error: function() {
-		this.state('free');
-		alert('Ошибка соединения. Попробуйте ещё раз или обратитесь к администратору.');
+	updateMode: function() {
+		var input = this.get('in');
+		var output = this.get('out');
+		this.engine.mode(input, output);
+	},
+	process: function(raw) {
+		return this.engine.process(raw);
 	}
 });

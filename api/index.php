@@ -6,7 +6,7 @@
 	*	https://github.com/asleepwalker/typographie
 	*/
 
-	require __DIR__.'/../../vendor/autoload.php';
+	require __DIR__.'/../vendor/autoload.php';
 
 	use asleepwalker\typographie\Typographie;
 
@@ -25,13 +25,7 @@
 	$out = 'plain'; if (isset($_POST['out'])) $out = $_POST['out'];
 	$actions = implode(',',$rules['actions']); if (isset($_POST['actions'])) $actions = $_POST['actions'];
 
-	if (($in == 'plain') && ($out == 'plain')) {
-		$engine = new Typographie($actions);
-	} else {
-		require_once('../engine/converter.class.php');
-		$engine = new TypographieModes($actions);
-		$engine->mode($in, $out);
-	}
+	$engine = new Typographie($actions, $in, $out);
 	$result = $engine->process($_POST['raw']);
 	returnResult($result);
 

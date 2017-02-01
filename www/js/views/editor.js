@@ -1,6 +1,7 @@
 var _ = require('underscore');
 var Backbone = require('backbone');
 var $ = require('backbone.native');
+var jsdiff = require('diff');
 
 module.exports = Backbone.View.extend({
 	el: $('#editor'),
@@ -21,11 +22,38 @@ module.exports = Backbone.View.extend({
 		}
 	},
 	process: function() {
-		var result = this.model.process($('#raw_input')[0].value);
-		result = result.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-		this.render(result);
+		var raw = $('#raw_input')[0].value;
+		var result = this.model.process(raw);
+		this.render(raw, result);
 	},
-	render: function(result) {
+	clean: function(text) {
+		return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+	},
+	diff: function(raw, text) {
+		var clean = this.clean;
+		var chanks = jsdiff.diffChars(raw, text);
+		return chanks.map(function(chank) {
+			if (chank.removed) {
+				return '';
+			} else if (chank.added) {
+				return '<span class="fix">' + clean(chank.value) + '</span>';
+			} else {
+				return clean(chank.value);
+			}
+			return ;
+		}).join('');
+	},
+	render: function(raw, result) {
+		if (this.model.get('highlight')) {
+			result = this.diff(raw, result);
+		} else {
+			result = this.clean(result);
+		}
+
+		if (this.model.get('out') == 'html') {
+			result = result.replace(/(&lt;.+?&gt;)/gi, '<span class="html">$1</span>');
+		}
+
 		$('#display').html(result);
 	}
 });

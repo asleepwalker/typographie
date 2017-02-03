@@ -10,7 +10,7 @@ module.exports = Backbone.Model.extend({
 		highlight: true,
 	},
 	initialize: function() {
-		this.engine = new Typographie([]);
+		this.engine = new Typographie();
 		this.updateActions();
 
 		this.bind('change:in change:out', _.bind(this.updateMode, this));
